@@ -1,0 +1,32 @@
+{
+	"name": "hexflow.book.entry",
+	"category": "hexcasting:patterns",
+	"icon": "minecraft:oak_sapling",
+	"pages": [
+		{
+			"type": "hexcasting:pattern",
+			"op_id": "hexflow:pure_map",
+			"anchor": "hexflow:pure_map",
+			"input": "list, list",
+			"output": "list",
+			"text": "book.descrip.hexflow:pure_map"
+		},
+		{
+			"type": "hexcasting:pattern",
+			"op_id": "hexflow:build_nested",
+			"anchor": "hexflow:build_nested",
+			"input": "list, num",
+			"output": "list",
+			"text": "book.descrip.hexflow:build_nested"
+		},
+		{
+			"type": "hexcasting:pattern",
+			"op_id": "hexflow:nested_modify",
+			"anchor": "hexflow:nested_modify",
+			"input": "list, list, any",
+			"output": "list",
+			"text": ""
+		},
+		"book.descrip.hexflow:nested_modify"
+	]
+}

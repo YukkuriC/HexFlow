@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "id": "hexflow",
+  "version": "${version}",
+  "name": "HexFlow",
+  "description": "Adds several new patterns for better control for spell evaluations.",
+  "authors": [
+    "YukkuriC"
+  ],
+  "contact": {
+    "homepage": "https://www.curseforge.com/minecraft/mc-mods/hexflow",
+    "sources": "https://github.com/YukkuriC/HexFlow",
+    "issues": "https://github.com/YukkuriC/HexFlow/issues"
+  },
+  "license": "MIT",
+  "icon": "logo.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "io.yukkuric.hexflow.fabric.HexFlowFabric"
+    ],
+    "client": [
+      "io.yukkuric.hexflow.fabric.client.HexFlowFabricClient"
+    ]
+  },
+  "mixins": [
+  ],
+  "depends": {
+    "fabricloader": ">=0.16.9",
+    "minecraft": "~1.20.1",
+    "java": ">=17",
+    "hexcasting": ">=0"
+  },
+  "suggests": {}
+}

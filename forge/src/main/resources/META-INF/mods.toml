@@ -1,0 +1,37 @@
+modLoader = "javafml"
+loaderVersion = "[43,)"
+issueTrackerURL = "https://github.com/YukkuriC/hexflowMod/issues"
+license = "MIT"
+
+[[mods]]
+modId = "hexflow"
+version = "${version}"
+displayName = "HexFlow"
+authors = "YukkuriC"
+description = '''
+Adds several new patterns for better control for spell evaluations.
+'''
+logoFile = "logo.png"
+updateJSONURL = "https://api.modrinth.com/updates/MRC1BQpK/forge_updates.json"
+displayURL = "https://modrinth.com/mod/hexflow"
+
+[[dependencies.hexflow]]
+modId = "forge"
+mandatory = true
+versionRange = "[43,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.hexflow]]
+modId = "minecraft"
+mandatory = true
+versionRange = "[1.20.1,1.20.1.1)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.hexflow]]
+modId = "hexcasting"
+mandatory = true
+versionRange = "[0,)"
+ordering = "AFTER"
+side = "BOTH"
