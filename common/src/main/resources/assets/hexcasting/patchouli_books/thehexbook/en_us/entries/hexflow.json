@@ -6,7 +6,7 @@
 		{
 			"type": "hexcasting:pattern",
 			"op_id": "hexflow:pure_map",
-			"anchor": "hexflow:pure_map",
+			"anchor": "pure_map",
 			"input": "list, list",
 			"output": "list",
 			"text": "book.descrip.hexflow:pure_map"
@@ -14,7 +14,7 @@
 		{
 			"type": "hexcasting:pattern",
 			"op_id": "hexflow:pure_reduce",
-			"anchor": "hexflow:pure_reduce",
+			"anchor": "pure_reduce",
 			"input": "list, list",
 			"output": "list",
 			"text": "book.descrip.hexflow:pure_reduce"
@@ -22,7 +22,7 @@
 		{
 			"type": "hexcasting:pattern",
 			"op_id": "hexflow:build_nested",
-			"anchor": "hexflow:build_nested",
+			"anchor": "build_nested",
 			"input": "list, num",
 			"output": "list",
 			"text": "book.descrip.hexflow:build_nested"
@@ -30,11 +30,28 @@
 		{
 			"type": "hexcasting:pattern",
 			"op_id": "hexflow:nested_modify",
-			"anchor": "hexflow:nested_modify",
+			"anchor": "nested_modify",
 			"input": "list, list, any",
 			"output": "list",
-			"text": ""
+			"text": "book.descrip.hexflow:nested_modify"
 		},
-		"book.descrip.hexflow:nested_modify"
+		{
+			"type": "hexcasting:manual_pattern",
+			"op_id": "hexflow:noob_num",
+			"anchor": "noob_num",
+			"input": "",
+			"output": "number",
+			"text": "book.descrip.hexflow:noob_num",
+			"patterns": [
+				{
+					"startdir": "SOUTH_EAST",
+					"signature": "aqawdedq"
+				}, {
+					"startdir": "NORTH_EAST",
+					"signature": "dedwaqae",
+					"q": 3
+				}
+			]
+		}
 	]
 }
