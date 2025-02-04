@@ -8,11 +8,11 @@ Adds several new patterns for better control of spell executions.
 
 ## Features
 - pure thoth
+- pure reduce
 - build_nested(list,num)
 - nested_modify(list,list,any)
 
 ## TODO
-- pure reduce
 - dynamic_rotate(list)
 - flat_num
 
