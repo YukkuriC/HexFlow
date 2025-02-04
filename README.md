@@ -11,10 +11,10 @@ Adds several new patterns for better control of spell executions.
 - pure reduce
 - build_nested(list,num)
 - nested_modify(list,list,any)
+- noob num evaluator
 
 ## TODO
 - dynamic_rotate(list)
-- flat_num
 
 ## TODO (experimental)
 - copy_op(any,pattern)

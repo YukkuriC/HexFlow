@@ -3,6 +3,7 @@ package io.yukkuric.hexflow.forge;
 import at.petrak.hexcasting.common.lib.HexRegistries;
 import io.yukkuric.hexflow.HexFlow;
 import io.yukkuric.hexflow.actions.HexFlowPatterns;
+import io.yukkuric.hexflow.actions.special.HexFlowSpecialHandlers;
 import io.yukkuric.hexflow.vm.HexFlowFrames;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -18,6 +19,8 @@ public final class HexFlowForge {
                 HexFlowPatterns.registerActions();
             } else if (key.equals(HexRegistries.CONTINUATION_TYPE)) {
                 HexFlowFrames.registerFrames();
+            } else if (key.equals(HexRegistries.SPECIAL_HANDLER)) {
+                HexFlowSpecialHandlers.registerSpecial();
             }
         });
     }

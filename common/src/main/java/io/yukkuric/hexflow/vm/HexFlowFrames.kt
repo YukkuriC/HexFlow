@@ -2,7 +2,7 @@ package io.yukkuric.hexflow.vm
 
 import at.petrak.hexcasting.api.casting.eval.vm.ContinuationFrame
 import at.petrak.hexcasting.common.lib.hex.HexContinuationTypes
-import io.yukkuric.hexflow.HexFlow
+import io.yukkuric.hexflow.HexFlow.flowModLoc
 import net.minecraft.core.Registry
 import net.minecraft.resources.ResourceLocation
 
@@ -22,7 +22,7 @@ class HexFlowFrames {
         }
 
         private fun <U : ContinuationFrame, T : ContinuationFrame.Type<U>> wrap(name: String, continuation: T) {
-            val key = ResourceLocation(HexFlow.MOD_ID, name)
+            val key = flowModLoc(name)
             FRAMES[key] = continuation
         }
     }

@@ -5,7 +5,7 @@ import at.petrak.hexcasting.api.casting.castables.Action
 import at.petrak.hexcasting.api.casting.math.HexDir
 import at.petrak.hexcasting.api.casting.math.HexPattern
 import at.petrak.hexcasting.common.lib.hex.HexActions
-import io.yukkuric.hexflow.HexFlow
+import io.yukkuric.hexflow.HexFlow.flowModLoc
 import net.minecraft.core.Registry
 import net.minecraft.resources.ResourceLocation
 
@@ -26,9 +26,9 @@ class HexFlowPatterns {
             for ((key, value) in CACHED) Registry.register(reg, key, value)
         }
 
-        private fun wrap(name: String?, signature: String, dir: HexDir, action: Action?): ActionRegistryEntry {
+        private fun wrap(name: String, signature: String, dir: HexDir, action: Action?): ActionRegistryEntry {
             val pattern = HexPattern.fromAngles(signature, dir)
-            val key = ResourceLocation(HexFlow.MOD_ID, name)
+            val key = flowModLoc(name)
             val entry = ActionRegistryEntry(pattern, action)
             CACHED[key] = entry
             return entry
