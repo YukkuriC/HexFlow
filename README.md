@@ -12,9 +12,7 @@ Adds several new patterns for better control of spell executions.
 - build_nested(list,num)
 - nested_modify(list,list,any)
 - noob num evaluator
-
-## TODO
-- dynamic_rotate(list)
+- mass rotate(num,list)
 
 ## TODO (experimental)
 - copy_op(any,pattern)
