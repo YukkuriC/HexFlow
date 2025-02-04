@@ -1,9 +1,11 @@
 {
   "hexcasting.action.hexflow:pure_map": "Pure Thoth",
+  "hexcasting.action.hexflow:pure_reduce": "Conway's Gambit",
   "hexcasting.action.hexflow:build_nested": "Build Nested",
   "hexcasting.action.hexflow:nested_modify": "Transplant's Exaltation",
   "hexflow.book.entry": "HexFlow Patterns",
-  "book.descrip.hexflow:pure_map": "Same as $(l:patterns/meta#hexcasting:for_each)$(action)Thoth's Gambit/$, but don't copy the original stack inside each sub-execution.",
+  "book.descrip.hexflow:pure_map": "Similar to $(l:patterns/meta#hexcasting:for_each)$(action)Thoth's Gambit/$, but don't copy the original stack inside each sub-execution.",
+  "book.descrip.hexflow:pure_reduce": "Similar to $(l:patterns/meta#hexcasting:for_each)$(action)Thoth's Gambit/$; for data list with length n, it executes n - 1 times; The first initial stack is the first two elements, and each subsequent execution uses the stack after the last execution.",
   "book.descrip.hexflow:build_nested": "Copy list #0 and set back to index #1",
   "book.descrip.hexflow:nested_modify": "List iota #0 is the nested list to be modified. According to the index sequence given by list #1, traverses step by step to the inner layer, and set the corresponding element to iota #2.$(br)Returns the modified nested list."
 }

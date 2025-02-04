@@ -65,10 +65,10 @@ def push_file(file):
                                  },
                                  headers=header,
                                  files={filename: open(file, 'rb')})
-        print("MR", response.text)
+        print("MR", response.status_code, response.text)
 
     # https://support.curseforge.com/en/support/solutions/articles/9000197321-curseforge-upload-api
-    if "curseforge":
+    if "curseforge" and 0:
         data = {
             "changelog": CHANGELOG,
             "changelogType": "markdown",

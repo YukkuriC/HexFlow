@@ -15,6 +15,7 @@ class HexFlowPatterns {
 
         init {
             wrap("pure_map", "dadadad", HexDir.NORTH_EAST, OpPureMap)
+            wrap("pure_reduce", "waawadadad", HexDir.NORTH_EAST, OpPureReduce)
             wrap("build_nested", "edqdeqdwewwdwqwdwwew", HexDir.SOUTH_WEST, OpBuildNested)
             wrap("nested_modify", "wdwawedqdewawdw", HexDir.SOUTH_WEST, OpNestedModify)
         }
