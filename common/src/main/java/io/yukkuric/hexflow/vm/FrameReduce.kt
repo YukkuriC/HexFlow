@@ -22,7 +22,7 @@ data class FrameReduce(
     val data: SpellList,
     val code: SpellList,
 ) : ContinuationFrame {
-    override val type = FrameRecoverStack.TYPE
+    override val type = TYPE
     override fun size() = data.size() + code.size()
 
     override fun breakDownwards(stack: List<Iota>): Pair<Boolean, List<Iota>> {
