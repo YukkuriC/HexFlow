@@ -1,6 +1,6 @@
 modLoader = "javafml"
 loaderVersion = "[43,)"
-issueTrackerURL = "https://github.com/YukkuriC/hexflowMod/issues"
+issueTrackerURL = "https://github.com/YukkuriC/HexFlow/issues"
 license = "MIT"
 
 [[mods]]

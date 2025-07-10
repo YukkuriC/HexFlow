@@ -2,6 +2,7 @@
 	"name": "hexflow.book.entry",
 	"category": "hexcasting:patterns",
 	"icon": "minecraft:oak_sapling",
+	"advancement": "hexcasting:root",
 	"pages": [
 		{
 			"type": "hexcasting:pattern",
