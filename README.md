@@ -12,6 +12,7 @@ Adds several new patterns for better control of spell executions.
 - nested_modify(list,list,any)
 - noob num evaluator
 - mass rotate(num,list)
+- weak escape being persistent in nested parens
 
 ## TODO (experimental)
 - copy_op(any,pattern)
