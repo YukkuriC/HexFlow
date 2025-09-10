@@ -61,6 +61,14 @@
 			"input": "many, num, list",
 			"output": "many",
 			"text": "book.descrip.hexflow:mass_rotate"
+		},
+		{
+			"type": "hexcasting:pattern",
+			"op_id": "hexflow:weak_escape",
+			"anchor": "weak_escape",
+			"input": "",
+			"output": "",
+			"text": "book.descrip.hexflow:weak_escape"
 		}
 	]
 }

@@ -19,6 +19,7 @@ class HexFlowPatterns {
             wrap("build_nested", "edqdeqdwewwdwqwdwwew", HexDir.SOUTH_WEST, OpBuildNested)
             wrap("nested_modify", "wdwawedqdewawdw", HexDir.SOUTH_WEST, OpNestedModify)
             wrap("mass_rotate", "edqdewawddw", HexDir.SOUTH_WEST, OpMassRotate)
+            wrap("weak_escape", "qqqaww", HexDir.WEST, OpWeakEscape)
         }
 
         @JvmStatic
