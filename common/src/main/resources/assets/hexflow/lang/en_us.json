@@ -5,7 +5,7 @@
   "hexcasting.action.hexflow:nested_modify": "Transplant's Exaltation",
   "hexcasting.action.hexflow:noob_num": "Noob Num Reflection",
   "hexcasting.action.hexflow:mass_rotate": "Mass Rotation Gambit",
-  "hexcasting.action.hexflow:weak_escape": "Weak Consideration",
+  "hexcasting.action.hexflow:weak_escape": "Contemplation",
   "hexflow.book.entry": "HexFlow Patterns",
   "book.descrip.hexflow:pure_map": "Similar to $(l:patterns/meta#hexcasting:for_each)$(action)Thoth's Gambit/$, but won't copy the original stack inside each sub-execution.",
   "book.descrip.hexflow:pure_reduce": "Similar to $(l:patterns/meta#hexcasting:for_each)$(action)Thoth's Gambit/$; for data list with length $(bold)n/$, it executes $(bold)n - 1/$ times; The first initial stack is the first two elements, and each subsequent execution uses the stack after the last execution.",
