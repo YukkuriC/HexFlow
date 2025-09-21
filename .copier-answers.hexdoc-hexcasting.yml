@@ -1,0 +1,27 @@
+# Changes here will be overwritten by Copier. NEVER EDIT MANUALLY
+# See: https://copier.readthedocs.io/en/stable/configuring/#the-copier-answersyml-file
+_commit: v0.1.14
+_src_path: gh:hexdoc-dev/hexdoc-hexcasting-template
+author: YukkuriC
+book_id: hexcasting:thehexbook
+default_branch: main
+github_repo: HexFlow
+gradle_mod_version_key: mod_version_base
+hexdoc_mod_plugin_classname: HexFlowModPlugin
+hexdoc_plugin_classname: HexFlowPlugin
+java_lang:
+    ext: java
+    src: java
+java_package: io/yukkuric/hexflow
+mod_display_name: HexFlow
+modid: hexflow
+multiloader: true
+package_export_root: doc/src/hexdoc_hexflow/_export
+package_name: hexdoc-hexflow
+package_slug: hexdoc_hexflow
+package_src: doc/src/hexdoc_hexflow
+pages_url: https://yukkuric.github.io/HexFlow/
+pattern_regex:
+    per_world_value: 'true'
+    regex: make\(\s*"(?P<name>[a-zA-Z0-9_\/]+)",\s*(?:new )?(?:ActionRegistryEntry|OperationAction)\(\s*HexPattern\.fromAngles\(\s*"(?P<signature>[aqweds]+)",\s*HexDir.(?P<startdir>\w+)\)
+pattern_registry: actions/HexFlowPatterns.kt
