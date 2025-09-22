@@ -1,13 +1,16 @@
 package io.yukkuric.hexflow.actions.special
 
+import at.petrak.hexcasting.api.casting.castables.Action
 import at.petrak.hexcasting.api.casting.castables.SpecialHandler
 import at.petrak.hexcasting.api.casting.eval.CastingEnvironment
 import at.petrak.hexcasting.api.casting.math.HexAngle
 import at.petrak.hexcasting.api.casting.math.HexDir.*
 import at.petrak.hexcasting.api.casting.math.HexPattern
+import at.petrak.hexcasting.api.utils.lightPurple
 import at.petrak.hexcasting.common.casting.actions.math.SpecialHandlerNumberLiteral
+import net.minecraft.network.chat.Component
 
-object NoobNumFactory : SpecialHandler.Factory<SpecialHandlerNumberLiteral> {
+object NoobNumFactory : SpecialHandler.Factory<NoobNumFactory.NoobNumberLiteral> {
     private fun ch2angle(ch: Char) = when (ch) {
         'w' -> HexAngle.FORWARD
         'q' -> HexAngle.LEFT
@@ -18,7 +21,7 @@ object NoobNumFactory : SpecialHandler.Factory<SpecialHandlerNumberLiteral> {
         else -> throw IllegalStateException()
     }
 
-    override fun tryMatch(pat: HexPattern, env: CastingEnvironment): SpecialHandlerNumberLiteral? {
+    override fun tryMatch(pat: HexPattern, env: CastingEnvironment): NoobNumberLiteral? {
         val sig = pat.anglesSignature()
         val isPos = sig.startsWith("aqawdedq")
         val isNeg = sig.startsWith("dedwaqae")
@@ -35,6 +38,14 @@ object NoobNumFactory : SpecialHandler.Factory<SpecialHandlerNumberLiteral> {
             }
         }
         if (isNeg) res *= -1
-        return SpecialHandlerNumberLiteral(res)
+        return NoobNumberLiteral(res)
+    }
+
+    class NoobNumberLiteral(val num: Double) : SpecialHandler {
+        override fun act() = SpecialHandlerNumberLiteral.InnerAction(num)
+        override fun getName() = Component.translatable(
+            "hexcasting.special.hexflow:noob_num",
+            Action.DOUBLE_FORMATTER.format(num)
+        ).lightPurple
     }
 }
