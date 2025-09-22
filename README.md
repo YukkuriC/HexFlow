@@ -5,6 +5,8 @@
 
 Adds several new patterns for better control of spell executions.
 
+[Online HexBook](https://yukkuric.github.io/HexFlow)
+
 ## Features
 - pure thoth
 - pure reduce
