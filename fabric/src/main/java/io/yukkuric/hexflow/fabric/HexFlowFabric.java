@@ -14,6 +14,8 @@ public final class HexFlowFabric extends HexFlow.IAPI implements ModInitializer 
         HexFlowPatterns.registerActions();
         HexFlowSpecialHandlers.registerSpecial();
         HexFlowFrames.registerFrames();
+
+        HexFlow.commonInit();
     }
     @Override
     public boolean modLoaded(@NotNull String id) {

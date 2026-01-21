@@ -1,6 +1,7 @@
 package io.yukkuric.hexflow
 
 import com.mojang.logging.LogUtils
+import io.yukkuric.hexflow.interop.hexparse.CopyMaskParser
 import net.minecraft.resources.ResourceLocation
 import org.slf4j.Logger
 
@@ -9,6 +10,13 @@ object HexFlow {
     val LOGGER: Logger = LogUtils.getLogger()
     fun flowModLoc(path: String): ResourceLocation {
         return ResourceLocation(MOD_ID, path)
+    }
+
+    @JvmStatic
+    fun commonInit() {
+        if (API.modLoaded("hexparse")) {
+            CopyMaskParser.initSelf()
+        }
     }
 
     lateinit var API: IAPI

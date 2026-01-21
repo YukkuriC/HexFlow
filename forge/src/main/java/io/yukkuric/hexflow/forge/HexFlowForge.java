@@ -25,6 +25,8 @@ public final class HexFlowForge extends HexFlow.IAPI {
                 HexFlowSpecialHandlers.registerSpecial();
             }
         });
+
+        HexFlow.commonInit();
     }
     @Override
     public boolean modLoaded(@NotNull String id) {

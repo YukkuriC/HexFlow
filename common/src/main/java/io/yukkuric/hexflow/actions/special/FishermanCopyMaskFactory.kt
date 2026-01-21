@@ -44,8 +44,9 @@ object FishermanCopyMaskFactory : SpecialHandler.Factory<FishermanCopyMaskFactor
 
         override fun getName() = Component.translatable(
             "hexcasting.special.hexflow:copy_mask",
-            targets.map { pick -> if (pick) 'n' else '-' }.joinToString("")
+            targetsString
         ).lightPurple
+        val targetsString = targets.map { pick -> if (pick) 'n' else '-' }.joinToString("")
     }
 
     override fun tryMatch(pattern: HexPattern, env: CastingEnvironment): Copier? {
