@@ -10,4 +10,14 @@ object HexFlow {
     fun flowModLoc(path: String): ResourceLocation {
         return ResourceLocation(MOD_ID, path)
     }
+
+    lateinit var API: IAPI
+
+    abstract class IAPI {
+        init {
+            API = this
+        }
+
+        abstract fun modLoaded(id: String): Boolean
+    }
 }
