@@ -9,6 +9,7 @@
   "hexcasting.special.hexflow:copy_mask": "电鱼之策略：%s",
   "hexcasting.action.hexflow:mass_rotate": "大型轮换之策略",
   "hexcasting.action.hexflow:weak_escape": "弱考察",
+  "hexcasting.action.hexflow:call_stack": "汉诺之策略",
   "hexflow.book.entry": "HexFlow新增图案",
   "book.descrip.hexflow:pure_map": "类似$(l:patterns/meta#hexcasting:for_each)$(action)托特之策略/$，但不拷贝初始栈。",
   "book.descrip.hexflow:pure_reduce": "类似$(l:patterns/meta#hexcasting:for_each)$(action)托特之策略/$；对长度$(bold)n/$的列表只执行$(bold)n - 1/$次，第一次初始栈为前2个元素，随后每次执行使用上次执行后的栈。",
@@ -17,5 +18,6 @@
   "book.descrip.hexflow:noob_num": "起始累计数字为0；将初始方向置于→，所有↗将使结果$(bold)* 2 + 1/$，所有→使结果$(bold)* 2/$，所有↘使结果$(bold)/ 10/$。右侧图案将使总结果取相反数。",
   "book.descrip.hexflow:mass_rotate": "接收重排范围和自底向上的序号列表，对剩余栈执行相应重排动作。例如，$(bold)3/$和$(bold)[1,2,0]/$对应$(l:patterns/stackmanip#hexcasting:rotate)$(action)轮换之策略/$，$(bold)2/$和$(bold)[0,1,0,1]/$对应$(l:patterns/stackmanip#hexcasting:2dup)$(action)狄俄斯库里之策略/$",
   "book.descrip.hexflow:weak_escape": "与$(l:patterns/patterns_as_iotas#hexcasting:escape)$(action)考察/$相同，不过拥有最低的执行优先级，在嵌套的$(l:patterns/patterns_as_iotas#hexcasting:open_paren)$(action)内省-反思/$内部不会以 $(bold)2^n/$ 形式指数增长",
-  "book.descrip.hexflow:copy_mask": "每个渔夫图案底部鱼线上的 \"n\" 复制一份对应的iota至栈顶，使用与$(l:patterns/stackmanip#hexcasting:mask)$(action)簿记员之策略/$相同的匹配规则。"
+  "book.descrip.hexflow:copy_mask": "每个渔夫图案底部鱼线上的 \"n\" 复制一份对应的iota至栈顶，使用与$(l:patterns/stackmanip#hexcasting:mask)$(action)簿记员之策略/$相同的匹配规则。",
+  "book.descrip.hexflow:call_stack": "在独立栈中执行给定的图案/列表/跳转? iota，之后将原栈恢复至底。如果给定一个不大于栈大小的参数X，前X个iota将被带走成为初始新栈。$(bold)注：使用此图案执行跳转iota可能导致严重数据丢失。/$"
 }

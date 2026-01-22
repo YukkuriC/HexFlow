@@ -86,6 +86,14 @@
 					"signature": "aadaqadqqd"
 				}
 			]
+		},
+		{
+			"type": "hexcasting:pattern",
+			"op_id": "hexflow:call_stack",
+			"anchor": "hexflow:call_stack",
+			"input": "executable(, int)",
+			"output": "many",
+			"text": "book.descrip.hexflow:call_stack"
 		}
 	]
 }
