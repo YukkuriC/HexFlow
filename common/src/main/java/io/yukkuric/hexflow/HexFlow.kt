@@ -14,8 +14,17 @@ object HexFlow {
 
     @JvmStatic
     fun commonInit() {
-        if (API.modLoaded("hexparse")) {
+        tryLoadInterop("hexparse") {
             CopyMaskParser.initSelf()
+        }
+    }
+
+    private fun tryLoadInterop(modId: String, loadFunc: () -> Any) {
+        if (!API.modLoaded(modId)) return
+        try {
+            loadFunc()
+        } catch (e: Throwable) {
+            LOGGER.error("error trying to load interop of $modId; error: ${e.stackTraceToString()}")
         }
     }
 
