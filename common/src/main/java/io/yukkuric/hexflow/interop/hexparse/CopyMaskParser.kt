@@ -4,7 +4,6 @@ import at.petrak.hexcasting.api.casting.iota.IotaType
 import at.petrak.hexcasting.api.casting.iota.PatternIota
 import at.petrak.hexcasting.api.casting.math.HexDir
 import at.petrak.hexcasting.api.casting.math.HexPattern
-import at.petrak.hexcasting.common.lib.hex.HexIotaTypes
 import io.yukkuric.hexflow.actions.special.FishermanCopyMaskFactory
 import io.yukkuric.hexparse.api.HexParseAPI
 import io.yukkuric.hexparse.parsers.str2nbt.BaseConstParser
