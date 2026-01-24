@@ -5,12 +5,14 @@ import io.yukkuric.hexflow.HexFlow;
 import io.yukkuric.hexflow.actions.HexFlowPatterns;
 import io.yukkuric.hexflow.actions.special.HexFlowSpecialHandlers;
 import io.yukkuric.hexflow.vm.HexFlowFrames;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.RegisterEvent;
+import org.jetbrains.annotations.NotNull;
 
 @Mod(HexFlow.MOD_ID)
-public final class HexFlowForge {
+public final class HexFlowForge extends HexFlow.IAPI {
     public HexFlowForge() {
         var modBus = FMLJavaModLoadingContext.get().getModEventBus();
         modBus.addListener((RegisterEvent event) -> {
@@ -23,5 +25,11 @@ public final class HexFlowForge {
                 HexFlowSpecialHandlers.registerSpecial();
             }
         });
+
+        HexFlow.commonInit();
+    }
+    @Override
+    public boolean modLoaded(@NotNull String id) {
+        return ModList.get().isLoaded(id);
     }
 }

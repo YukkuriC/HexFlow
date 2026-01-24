@@ -12,6 +12,7 @@ class HexFlowSpecialHandlers {
 
         init {
             wrap("noob_num", NoobNumFactory)
+            wrap("copy_mask", FishermanCopyMaskFactory)
         }
 
         @JvmStatic

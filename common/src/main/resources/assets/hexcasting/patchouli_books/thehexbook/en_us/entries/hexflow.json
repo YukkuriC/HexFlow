@@ -69,6 +69,31 @@
 			"input": "",
 			"output": "",
 			"text": "book.descrip.hexflow:weak_escape"
+		},
+		{
+			"type": "hexcasting:manual_pattern",
+			"op_id": "hexflow:copy_mask",
+			"anchor": "hexflow:copy_mask",
+			"input": "",
+			"output": "many",
+			"text": "book.descrip.hexflow:copy_mask",
+			"patterns": [
+				{
+					"startdir": "EAST",
+					"signature": "aadaqqqdq"
+				}, {
+					"startdir": "EAST",
+					"signature": "aadaqadqqd"
+				}
+			]
+		},
+		{
+			"type": "hexcasting:pattern",
+			"op_id": "hexflow:call_stack",
+			"anchor": "hexflow:call_stack",
+			"input": "executable(, int)",
+			"output": "many",
+			"text": "book.descrip.hexflow:call_stack"
 		}
 	]
 }
