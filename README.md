@@ -8,6 +8,9 @@ Adds several new patterns for better control of spell executions.
 [Online HexBook](https://yukkuric.github.io/HexFlow)
 
 ## Features
+
+_read HexBook for more details_
+
 - pure thoth
 - pure reduce
 - build_nested(list,num)
@@ -15,7 +18,5 @@ Adds several new patterns for better control of spell executions.
 - noob num evaluator
 - mass rotate(num,list)
 - weak escape being persistent in nested parens
-
-## TODO (experimental)
-- copy_op(any,pattern)
-- current_code
+- pattern to copy arbitrary many elements in stack at once
+- call_stack(program[, arg_count])
