@@ -54,6 +54,9 @@ subprojects {
         minecraft "net.minecraft:minecraft:$rootProject.minecraft_version"
         mappings loom.officialMojangMappings()
 
+        compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.5.0"))
+        implementation "io.github.llamalad7:mixinextras-forge:0.5.0"
+
         modImplementation("at.petra-k.hexcasting:hexcasting-${nameForRef}-${project.minecraft_version}:${project.hexcastingVersion}") { transitive = false }
 
         // required dep
