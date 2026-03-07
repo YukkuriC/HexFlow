@@ -35,6 +35,16 @@ subprojects {
         // for more information about repositories.
         mavenLocal()
         maven { url "https://maven.blamejared.com/" }
+        maven {
+            url "https://cursemaven.com"
+            content {
+                includeGroup "curse.maven"
+            }
+        }
+        maven {
+            name = 'Kotlin for Forge'
+            url = 'https://thedarkcolour.github.io/KotlinForForge/'
+        }
         flatDir { dir "libs/$minecraft_version" }
         flatDir { dir "../libs/$minecraft_version" }
     }
@@ -45,6 +55,20 @@ subprojects {
         mappings loom.officialMojangMappings()
 
         modImplementation("at.petra-k.hexcasting:hexcasting-${nameForRef}-${project.minecraft_version}:${project.hexcastingVersion}") { transitive = false }
+
+        // required dep
+        implementation 'thedarkcolour:kotlinforforge:4.10.0'
+        modImplementation "curse.maven:caelus-308989:5281700"
+        modImplementation "curse.maven:inline-971167:6556850"
+        modImplementation "curse.maven:patchouli-306770:6164575"
+        modImplementation "curse.maven:curios-309927:5066845"
+        modImplementation "curse.maven:cloth-config-348521:5729105"
+        // interop dep
+        modImplementation "curse.maven:hexparse-1148731:7676910"
+        // helpers in runClient
+        // modImplementation "curse.maven:jade-324717:6855440"
+        modImplementation "curse.maven:just-enough-characters-250702:7411324"
+        modImplementation "curse.maven:jei-238222:7270446"
 
         modImplementation fileTree(dir: "libs/$minecraft_version", include: '*.jar')
         modImplementation fileTree(dir: "../libs/$minecraft_version", include: '*.jar')
