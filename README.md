@@ -11,8 +11,9 @@ Adds several new patterns for better control of spell executions.
 
 _read HexBook for more details_
 
-- pure thoth
-- pure reduce
+- LOTS of thoth
+    - pure thoth
+    - pure reduce
 - build_nested(list,num)
 - nested_modify(list,list,any)
 - noob num evaluator

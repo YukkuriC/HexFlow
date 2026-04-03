@@ -6,6 +6,8 @@ import at.petrak.hexcasting.api.casting.math.HexDir
 import at.petrak.hexcasting.api.casting.math.HexPattern
 import at.petrak.hexcasting.common.lib.hex.HexActions
 import io.yukkuric.hexflow.HexFlow.flowModLoc
+import io.yukkuric.hexflow.actions.thoth.OpPureMap
+import io.yukkuric.hexflow.actions.thoth.OpPureReduce
 import net.minecraft.core.Registry
 import net.minecraft.resources.ResourceLocation
 
