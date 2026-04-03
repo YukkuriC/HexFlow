@@ -23,8 +23,7 @@ class OpCubeFor(override val isPure: Boolean) : AbstractThoth() {
         var lastPos = size - 1
         var option = 0
 
-        val hasOption = stack.lastOrNull() is DoubleIota
-        if (hasOption) {
+        if (stack.lastOrNull() is DoubleIota) {
             option = stack.getIntBetween(lastPos, 0, 3, size)
             lastPos--
             usedArgc++
