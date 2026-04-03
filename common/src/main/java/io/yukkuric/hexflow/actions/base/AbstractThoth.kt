@@ -8,8 +8,12 @@ import at.petrak.hexcasting.common.lib.hex.HexEvalSounds
 import io.yukkuric.hexflow.vm.FrameRecoverStack
 
 // [code], ...args -> thoth(code, getData(args))
-abstract class AbstractThoth : ActionBound() {
-    // built data &
+// also default impl. for PureMap
+// (comment_polluted)splat,(duplicate,bool_coerce,(stack_len,last_n_list,halt)unappend,if,eval)(1,1,4,5,null,4)pure_map,print,pop,print
+open class AbstractThoth : ActionBound() {
+    open val isPure: Boolean = true
+
+    // built data & args count
     open fun getData(): Pair<SpellList, Int> {
         val ret = stack.getList(stack.lastIndex, stack.size)
         return Pair(ret, 1)
@@ -24,7 +28,8 @@ abstract class AbstractThoth : ActionBound() {
         return doThoth(instrs, datums)
     }
 
-    abstract fun doThoth(code: SpellList, data: SpellList): OperationResult
+    open fun doThoth(code: SpellList, data: SpellList) =
+        if (isPure) resultPureThoth(code, data) else resultThoth(code, data)
 
     fun resultThoth(code: SpellList, data: SpellList): OperationResult {
         val frameThoth = FrameForEach(data, code, null, mutableListOf())
