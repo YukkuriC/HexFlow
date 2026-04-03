@@ -5,6 +5,7 @@ import at.petrak.hexcasting.api.casting.eval.CastingEnvironment
 import at.petrak.hexcasting.api.casting.eval.OperationResult
 import at.petrak.hexcasting.api.casting.eval.vm.CastingImage
 import at.petrak.hexcasting.api.casting.eval.vm.SpellContinuation
+import at.petrak.hexcasting.api.casting.iota.DoubleIota
 import at.petrak.hexcasting.api.casting.iota.Iota
 import at.petrak.hexcasting.api.casting.mishaps.MishapNotEnoughArgs
 
@@ -38,5 +39,14 @@ abstract class ActionBound : Action {
 
     fun dropStack(count: Int) {
         for (i in 0 until count) stack.removeLastOrNull()
+    }
+
+    fun countOptionNums(maxCount: Int = Int.MAX_VALUE): Int {
+        val revStart = stack.lastIndex
+        val checkRange = maxCount.coerceAtMost(stack.size)
+        for (offset in 0 until checkRange) {
+            if (stack[revStart - offset] !is DoubleIota) return offset
+        }
+        return checkRange
     }
 }

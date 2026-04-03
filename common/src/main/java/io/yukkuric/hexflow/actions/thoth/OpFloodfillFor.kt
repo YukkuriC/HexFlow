@@ -3,7 +3,7 @@ package io.yukkuric.hexflow.actions.thoth
 import at.petrak.hexcasting.api.casting.SpellList
 import at.petrak.hexcasting.api.casting.getBlockPos
 import at.petrak.hexcasting.api.casting.getIntBetween
-import at.petrak.hexcasting.api.casting.iota.DoubleIota
+import at.petrak.hexcasting.api.casting.getPositiveInt
 import at.petrak.hexcasting.api.casting.iota.Vec3Iota
 import at.petrak.hexcasting.api.mod.HexConfig
 import io.yukkuric.hexflow.actions.base.AbstractThoth
@@ -12,7 +12,7 @@ import net.minecraft.core.Vec3i
 import java.util.function.Consumer
 import kotlin.math.abs
 
-// [code], pos(, option)
+// [code], pos(, option=1, maxCount)
 // (print,break_block)#my_aim,raycast,for_range/floodfill,print
 class OpFloodFillFor(override val isPure: Boolean) : AbstractThoth() {
     companion object {
@@ -61,20 +61,25 @@ class OpFloodFillFor(override val isPure: Boolean) : AbstractThoth() {
 
     override fun getData(): Pair<SpellList, Int> {
         val size = stack.size
+        val optionOffset = countOptionNums(2)
+        var option = 1 // only 6 faces by default
+        var maxIter = Int.MAX_VALUE
+        when (optionOffset) {
+            1 -> {
+                option = stack.getIntBetween(size - 1, 1, 7, size)
+            }
 
-        // pick args
-        var usedArgc = 1
-        var lastPos = size - 1
-        var option = (stack.lastOrNull() as? DoubleIota)?.let {
-            usedArgc++
-            stack.getIntBetween(lastPos--, 1, 7, size)
-        } ?: 1 // only 6 faces by default
-        val startPos = stack.getBlockPos(lastPos, size)
+            2 -> {
+                option = stack.getIntBetween(size - 2, 1, 7, size)
+                maxIter = 1 + stack.getPositiveInt(size - 1, size)
+            }
+        }
+        val startPos = stack.getBlockPos(size - 1 - optionOffset, size)
         env.assertPosInRange(startPos)
         val startBlock = env.world.getBlockState(startPos).block
 
         // BFS
-        val maxIter = HexConfig.server().maxOpCount()
+        maxIter = maxIter.coerceAtMost(HexConfig.server().maxOpCount())
         val ret = mutableListOf<Vec3Iota>()
         BlockPos.breadthFirstTraversal(
             startPos, maxIter, maxIter,
@@ -83,6 +88,6 @@ class OpFloodFillFor(override val isPure: Boolean) : AbstractThoth() {
             val newState = env.world.getBlockState(it)
             newState.`is`(startBlock)
         }
-        return Pair(SpellList.LList(ret), usedArgc)
+        return Pair(SpellList.LList(ret), 1 + optionOffset)
     }
 }
