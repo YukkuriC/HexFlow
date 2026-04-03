@@ -34,7 +34,7 @@ open class AbstractThoth : ActionBound() {
     fun resultThoth(code: SpellList, data: SpellList): OperationResult {
         val frameThoth = FrameForEach(data, code, null, mutableListOf())
         return OperationResult(
-            image.withUsedOp(),
+            image.copy(opsConsumed = image.opsConsumed + 1, stack = stack),
             listOf(),
             continuation.pushFrame(frameThoth),
             HexEvalSounds.THOTH
