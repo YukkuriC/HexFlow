@@ -7,6 +7,7 @@ import at.petrak.hexcasting.api.casting.math.HexPattern
 import at.petrak.hexcasting.common.lib.hex.HexActions
 import io.yukkuric.hexflow.HexFlow.flowModLoc
 import io.yukkuric.hexflow.actions.base.AbstractThoth
+import io.yukkuric.hexflow.actions.thoth.OpCubeFor
 import io.yukkuric.hexflow.actions.thoth.OpPureReduce
 import net.minecraft.core.Registry
 import net.minecraft.resources.ResourceLocation
@@ -18,6 +19,9 @@ class HexFlowPatterns {
         init {
             wrap("pure_map", "dadadad", HexDir.NORTH_EAST, AbstractThoth())
             wrap("pure_reduce", "waawadadad", HexDir.NORTH_EAST, OpPureReduce)
+            wrap("for_range/cube", "dadadqqaqqqqq", HexDir.NORTH_EAST, OpCubeFor(false))
+            wrap("for_range/cube/pure", "dadadadqqaqqqqq", HexDir.NORTH_EAST, OpCubeFor(true))
+
             wrap("build_nested", "edqdeqdwewwdwqwdwwew", HexDir.SOUTH_WEST, OpBuildNested)
             wrap("nested_modify", "wdwawedqdewawdw", HexDir.SOUTH_WEST, OpNestedModify)
             wrap("mass_rotate", "edqdewawddw", HexDir.SOUTH_WEST, OpMassRotate)
