@@ -6,22 +6,6 @@
 	"pages": [
 		{
 			"type": "hexcasting:pattern",
-			"op_id": "hexflow:pure_map",
-			"anchor": "hexflow:pure_map",
-			"input": "list, list",
-			"output": "list",
-			"text": "book.descrip.hexflow:pure_map"
-		},
-		{
-			"type": "hexcasting:pattern",
-			"op_id": "hexflow:pure_reduce",
-			"anchor": "hexflow:pure_reduce",
-			"input": "list, list",
-			"output": "list",
-			"text": "book.descrip.hexflow:pure_reduce"
-		},
-		{
-			"type": "hexcasting:pattern",
 			"op_id": "hexflow:build_nested",
 			"anchor": "hexflow:build_nested",
 			"input": "list, num",
