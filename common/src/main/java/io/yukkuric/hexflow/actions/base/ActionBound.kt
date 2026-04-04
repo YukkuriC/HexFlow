@@ -1,21 +1,23 @@
-package io.yukkuric.hexflow.actions
+package io.yukkuric.hexflow.actions.base
 
-import at.petrak.hexcasting.api.casting.SpellList
 import at.petrak.hexcasting.api.casting.castables.Action
 import at.petrak.hexcasting.api.casting.eval.CastingEnvironment
 import at.petrak.hexcasting.api.casting.eval.OperationResult
 import at.petrak.hexcasting.api.casting.eval.vm.CastingImage
 import at.petrak.hexcasting.api.casting.eval.vm.SpellContinuation
-import at.petrak.hexcasting.api.casting.getList
+import at.petrak.hexcasting.api.casting.iota.DoubleIota
 import at.petrak.hexcasting.api.casting.iota.Iota
 import at.petrak.hexcasting.api.casting.mishaps.MishapNotEnoughArgs
 
-abstract class AbstractThoth : Action {
+abstract class ActionBound : Action {
     protected lateinit var image: CastingImage
     protected lateinit var env: CastingEnvironment
     protected lateinit var continuation: SpellContinuation
     protected lateinit var stack: MutableList<Iota>
 
+    abstract fun operateBound(): OperationResult
+
+    @Synchronized
     override fun operate(
         env: CastingEnvironment,
         image: CastingImage,
@@ -26,17 +28,25 @@ abstract class AbstractThoth : Action {
         this.image = image
         this.continuation = continuation
         stack = image.stack.toMutableList()
-
-        if (stack.size < 2)
-            throw MishapNotEnoughArgs(2, stack.size)
-
-        val instrs = stack.getList(stack.lastIndex - 1, stack.size)
-        val datums = stack.getList(stack.lastIndex, stack.size)
-        stack.removeLastOrNull()
-        stack.removeLastOrNull()
-
-        return doThoth(instrs, datums)
+        return operateBound()
     }
 
-    abstract fun doThoth(code: SpellList, data: SpellList): OperationResult
+    // helpers
+    fun assertArgCount(count: Int) {
+        if (stack.size < count)
+            throw MishapNotEnoughArgs(count, stack.size)
+    }
+
+    fun dropStack(count: Int) {
+        for (i in 0 until count) stack.removeLastOrNull()
+    }
+
+    fun countOptionNums(maxCount: Int = Int.MAX_VALUE): Int {
+        val revStart = stack.lastIndex
+        val checkRange = maxCount.coerceAtMost(stack.size)
+        for (offset in 0 until checkRange) {
+            if (stack[revStart - offset] !is DoubleIota) return offset
+        }
+        return checkRange
+    }
 }

@@ -8,14 +8,18 @@ Adds several new patterns for better control of spell executions.
 [Online HexBook](https://yukkuric.github.io/HexFlow)
 
 ## Features
-- pure thoth
-- pure reduce
+
+_read HexBook for more details_
+
+- LOTS of thoth
+    - pure thoth
+    - pure reduce
+    - iterate inside cuboid
+    - floodfill BFS by block type
 - build_nested(list,num)
 - nested_modify(list,list,any)
 - noob num evaluator
 - mass rotate(num,list)
 - weak escape being persistent in nested parens
-
-## TODO (experimental)
-- copy_op(any,pattern)
-- current_code
+- pattern to copy arbitrary many elements in stack at once
+- call_stack(program[, arg_count])

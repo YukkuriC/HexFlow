@@ -1,10 +1,11 @@
-package io.yukkuric.hexflow.actions
+package io.yukkuric.hexflow.actions.thoth
 
 import at.petrak.hexcasting.api.casting.SpellList
 import at.petrak.hexcasting.api.casting.eval.OperationResult
 import at.petrak.hexcasting.api.casting.iota.Iota
 import at.petrak.hexcasting.api.casting.iota.ListIota
 import at.petrak.hexcasting.common.lib.hex.HexEvalSounds
+import io.yukkuric.hexflow.actions.base.AbstractThoth
 import io.yukkuric.hexflow.vm.FrameRecoverStack
 import io.yukkuric.hexflow.vm.FrameReduce
 

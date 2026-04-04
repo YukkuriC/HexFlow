@@ -1,0 +1,58 @@
+{
+	"name": "hexflow.book.entry.thoth",
+	"category": "hexcasting:patterns",
+	"icon": "minecraft:cherry_sapling",
+	"advancement": "hexcasting:root",
+	"pages": [
+		{
+			"type": "hexcasting:pattern",
+			"op_id": "hexflow:pure_map",
+			"anchor": "hexflow:pure_map",
+			"input": "list, list",
+			"output": "list",
+			"text": "book.descrip.hexflow:pure_map"
+		},
+		{
+			"type": "hexcasting:pattern",
+			"op_id": "hexflow:pure_reduce",
+			"anchor": "hexflow:pure_reduce",
+			"input": "list, list",
+			"output": "list",
+			"text": "book.descrip.hexflow:pure_reduce"
+		},
+		{
+			"type": "hexcasting:pattern",
+			"op_id": "hexflow:for_range/cube",
+			"anchor": "hexflow:for_range/cube",
+			"input": "list, vec, vec(, int)",
+			"output": "list",
+			"text": "book.descrip.hexflow:for_range/cube"
+		},
+		"book.descrip.hexflow:for_range/cube.2",
+		{
+			"type": "hexcasting:pattern",
+			"op_id": "hexflow:for_range/floodfill",
+			"anchor": "hexflow:for_range/floodfill",
+			"input": "list, vec(, int(, int))",
+			"output": "list",
+			"text": "book.descrip.hexflow:for_range/floodfill"
+		},
+		"book.descrip.hexflow:for_range/floodfill.2",
+		{
+			"type": "hexcasting:pattern",
+			"op_id": "hexflow:for_range/cube/pure",
+			"anchor": "hexflow:for_range/cube/pure",
+			"input": "list, vec, vec(, int)",
+			"output": "list",
+			"text": "book.descrip.hexflow:for_range/?/pure"
+		},
+		{
+			"type": "hexcasting:pattern",
+			"op_id": "hexflow:for_range/floodfill/pure",
+			"anchor": "hexflow:for_range/floodfill/pure",
+			"input": "list, vec(, int(, int))",
+			"output": "list",
+			"text": "book.descrip.hexflow:for_range/?/pure.2"
+		}
+	]
+}
