@@ -5,8 +5,7 @@ import at.petrak.hexcasting.api.casting.eval.env.CircleCastEnv
 import at.petrak.hexcasting.api.casting.getBlockPos
 import at.petrak.hexcasting.api.casting.getIntBetween
 import at.petrak.hexcasting.api.casting.iota.Vec3Iota
-import at.petrak.hexcasting.api.casting.mishaps.MishapEvalTooMuch
-import at.petrak.hexcasting.api.mod.HexConfig
+import at.petrak.hexcasting.api.casting.mishaps.MishapStackSize
 import io.yukkuric.hexflow.actions.base.AbstractThoth
 import net.minecraft.core.BlockPos
 import kotlin.math.abs
@@ -28,7 +27,7 @@ class OpCubeFor(override val isPure: Boolean) : AbstractThoth() {
         // pre-check cuboid size
         pos1.subtract(pos2).let {
             val preSize = abs(1f * it.x * it.y * it.z)
-            if (preSize >= HexConfig.server().maxOpCount()) throw MishapEvalTooMuch()
+            if (preSize >= MaxDataCount) throw MishapStackSize()
         }
 
         // build & sort list
