@@ -5,7 +5,8 @@
 
 Adds several new patterns for better control of spell executions.
 
-[Online HexBook](https://yukkuric.github.io/HexFlow)
+[<img src="https://github.com/SamsTheNerd/HexGloop/blob/73ea39b3becd/externalassets/hexdoc-badgecozy.svg?raw=true" alt="A badge for hexdoc in the style of Devins Badges" width=180>](https://yukkuric.github.io/HexFlow)
+[<img src="https://github.com/SamsTheNerd/HexGloop/blob/73ea39b3becd/externalassets/addon-badge-cozy.svg?raw=true" alt="A badge for addons.hexxy.media in the style of Devins Badges" width=160>](https://addons.hexxy.media)
 
 ## Features
 
@@ -15,7 +16,8 @@ _read HexBook for more details_
     - pure thoth
     - pure reduce
     - iterate inside cuboid
-    - floodfill BFS by block type
+    - iterate on straight line
+    - (great spell) floodfill BFS by block type
 - build_nested(list,num)
 - nested_modify(list,list,any)
 - noob num evaluator

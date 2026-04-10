@@ -4,6 +4,7 @@ import at.petrak.hexcasting.api.casting.SpellList
 import at.petrak.hexcasting.api.casting.eval.OperationResult
 import at.petrak.hexcasting.api.casting.eval.vm.FrameForEach
 import at.petrak.hexcasting.api.casting.getList
+import at.petrak.hexcasting.api.mod.HexConfig
 import at.petrak.hexcasting.common.lib.hex.HexEvalSounds
 import io.yukkuric.hexflow.vm.FrameRecoverStack
 
@@ -50,5 +51,10 @@ open class AbstractThoth : ActionBound() {
             continuation.pushFrame(frameKeepFrame).pushFrame(frameThoth),
             HexEvalSounds.THOTH
         )
+    }
+
+    companion object {
+        val MaxDataCount
+            get() = HexConfig.server().maxOpCount()
     }
 }

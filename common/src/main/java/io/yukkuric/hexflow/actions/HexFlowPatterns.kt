@@ -9,6 +9,7 @@ import io.yukkuric.hexflow.HexFlow.flowModLoc
 import io.yukkuric.hexflow.actions.base.AbstractThoth
 import io.yukkuric.hexflow.actions.thoth.OpCubeFor
 import io.yukkuric.hexflow.actions.thoth.OpFloodFillFor
+import io.yukkuric.hexflow.actions.thoth.OpLineFor
 import io.yukkuric.hexflow.actions.thoth.OpPureReduce
 import net.minecraft.core.Registry
 import net.minecraft.resources.ResourceLocation
@@ -22,6 +23,8 @@ class HexFlowPatterns {
             wrap("pure_reduce", "waawadadad", HexDir.NORTH_EAST, OpPureReduce)
             wrap("for_range/cube", "dadadqqaqqqqq", HexDir.NORTH_EAST, OpCubeFor(false))
             wrap("for_range/cube/pure", "dadadadqqaqqqqq", HexDir.NORTH_EAST, OpCubeFor(true))
+            wrap("for_range/line", "dadadawwa", HexDir.NORTH_EAST, OpLineFor(false))
+            wrap("for_range/line/pure", "dadadadawwa", HexDir.NORTH_EAST, OpLineFor(true))
             wrap(
                 "for_range/floodfill",
                 "dadadqadadwdadadwdadaddwwawwaadaddwaaddad",

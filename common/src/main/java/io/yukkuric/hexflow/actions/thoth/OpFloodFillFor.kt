@@ -5,7 +5,6 @@ import at.petrak.hexcasting.api.casting.getBlockPos
 import at.petrak.hexcasting.api.casting.getIntBetween
 import at.petrak.hexcasting.api.casting.getPositiveInt
 import at.petrak.hexcasting.api.casting.iota.Vec3Iota
-import at.petrak.hexcasting.api.mod.HexConfig
 import io.yukkuric.hexflow.actions.base.AbstractThoth
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Vec3i
@@ -79,7 +78,7 @@ class OpFloodFillFor(override val isPure: Boolean) : AbstractThoth() {
         val startBlock = env.world.getBlockState(startPos).block
 
         // BFS
-        maxIter = maxIter.coerceAtMost(HexConfig.server().maxOpCount())
+        maxIter = maxIter.coerceAtMost(MaxDataCount)
         val ret = mutableListOf<Vec3Iota>()
         BlockPos.breadthFirstTraversal(
             startPos, maxIter, maxIter,
