@@ -16,7 +16,8 @@ _read HexBook for more details_
     - pure thoth
     - pure reduce
     - iterate inside cuboid
-    - floodfill BFS by block type
+    - iterate on straight line
+    - (great spell) floodfill BFS by block type
 - build_nested(list,num)
 - nested_modify(list,list,any)
 - noob num evaluator
