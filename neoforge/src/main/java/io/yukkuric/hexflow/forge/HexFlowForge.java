@@ -5,16 +5,16 @@ import io.yukkuric.hexflow.HexFlow;
 import io.yukkuric.hexflow.actions.HexFlowPatterns;
 import io.yukkuric.hexflow.actions.special.HexFlowSpecialHandlers;
 import io.yukkuric.hexflow.vm.HexFlowFrames;
-import net.minecraftforge.fml.ModList;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.registries.RegisterEvent;
+import net.neoforged.fml.ModContainer;
+import net.neoforged.fml.ModList;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.registries.RegisterEvent;
 import org.jetbrains.annotations.NotNull;
 
 @Mod(HexFlow.MOD_ID)
 public final class HexFlowForge extends HexFlow.IAPI {
-    public HexFlowForge() {
-        var modBus = FMLJavaModLoadingContext.get().getModEventBus();
+    public HexFlowForge(ModContainer modContainer) {
+        var modBus = modContainer.getEventBus();
         modBus.addListener((RegisterEvent event) -> {
             var key = event.getRegistryKey();
             if (key.equals(HexRegistries.ACTION)) {
