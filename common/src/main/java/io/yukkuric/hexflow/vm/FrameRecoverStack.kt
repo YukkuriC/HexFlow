@@ -6,14 +6,12 @@ import at.petrak.hexcasting.api.casting.eval.vm.CastingVM
 import at.petrak.hexcasting.api.casting.eval.vm.ContinuationFrame
 import at.petrak.hexcasting.api.casting.eval.vm.SpellContinuation
 import at.petrak.hexcasting.api.casting.iota.Iota
+import at.petrak.hexcasting.api.casting.iota.IotaType
 import at.petrak.hexcasting.api.casting.iota.NullIota
-import at.petrak.hexcasting.api.utils.NBTBuilder
-import at.petrak.hexcasting.api.utils.getList
-import at.petrak.hexcasting.api.utils.serializeToNBT
 import at.petrak.hexcasting.common.lib.hex.HexEvalSounds
-import at.petrak.hexcasting.common.lib.hex.HexIotaTypes
-import net.minecraft.nbt.CompoundTag
-import net.minecraft.nbt.Tag
+import com.mojang.serialization.codecs.RecordCodecBuilder
+import net.minecraft.network.codec.ByteBufCodecs
+import net.minecraft.network.codec.StreamCodec
 import net.minecraft.server.level.ServerLevel
 
 data class FrameRecoverStack(val myStack: List<Iota>) : ContinuationFrame {
@@ -32,7 +30,7 @@ data class FrameRecoverStack(val myStack: List<Iota>) : ContinuationFrame {
 
     override fun evaluate(continuation: SpellContinuation, level: ServerLevel, harness: CastingVM): CastResult {
         return CastResult(
-            NullIota(),
+            NullIota.INSTANCE,
             continuation,
             // reset escapes so they don't carry over to other iterations or out of thoth
             harness.image.copy(stack = recoverAnyway(harness.image.stack)),
@@ -42,19 +40,23 @@ data class FrameRecoverStack(val myStack: List<Iota>) : ContinuationFrame {
         )
     }
 
-    override fun serializeToNBT() = NBTBuilder {
-        "stack" %= myStack.serializeToNBT()
-    }
-
     companion object {
         @JvmField
         val TYPE: ContinuationFrame.Type<FrameRecoverStack> = object : ContinuationFrame.Type<FrameRecoverStack> {
-            override fun deserializeFromNBT(tag: CompoundTag, world: ServerLevel) = FrameRecoverStack(
-                HexIotaTypes.LIST.deserialize(
-                    tag.getList("stack", Tag.TAG_COMPOUND),
-                    world
-                )!!.list.toMutableList()
+            val CODEC = RecordCodecBuilder.mapCodec<FrameRecoverStack> { inst ->
+                inst.group(
+                    IotaType.TYPED_CODEC.listOf().fieldOf("myStack").forGetter { it.myStack }
+                ).apply(inst, ::FrameRecoverStack)
+            }
+
+            val STREAM_CODEC = StreamCodec.composite(
+                IotaType.TYPED_STREAM_CODEC.apply(ByteBufCodecs.list()), FrameRecoverStack::myStack,
+                ::FrameRecoverStack
             )
+
+            override fun codec() = CODEC
+
+            override fun streamCodec() = STREAM_CODEC
         }
     }
 }

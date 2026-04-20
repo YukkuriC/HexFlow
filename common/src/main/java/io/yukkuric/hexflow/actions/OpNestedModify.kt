@@ -2,15 +2,7 @@ package io.yukkuric.hexflow.actions
 
 import at.petrak.hexcasting.api.casting.castables.ConstMediaAction
 import at.petrak.hexcasting.api.casting.eval.CastingEnvironment
-import at.petrak.hexcasting.api.casting.getList
-import at.petrak.hexcasting.api.casting.iota.DoubleIota
 import at.petrak.hexcasting.api.casting.iota.Iota
-import at.petrak.hexcasting.api.casting.iota.IotaType
-import at.petrak.hexcasting.api.casting.mishaps.Mishap
-import at.petrak.hexcasting.api.casting.mishaps.MishapInvalidIota
-import at.petrak.hexcasting.common.lib.hex.HexIotaTypes
-import net.minecraft.nbt.ListTag
-import net.minecraft.nbt.Tag
 
 // ([114,514,[1,[[9[19]],810]]],[2,1,0,1,0],get_caster)splat,hexflow:nested_modify
 // ([114],[2,1,0,1,0],get_caster)splat,hexflow:nested_modify
@@ -18,6 +10,7 @@ object OpNestedModify : ConstMediaAction {
     override val argc = 3
 
     override fun execute(args: List<Iota>, env: CastingEnvironment): List<Iota> {
+        /*
         val orig = args.get(0)
         val listNbt = IotaType.serialize(orig)
         val idxList = args.getList(1)
@@ -41,5 +34,7 @@ object OpNestedModify : ConstMediaAction {
             return listOf(args[0])
         }
         return listOf(IotaType.deserialize(listNbt, env.world))
+        */
+        TODO("no nbt for in-place editing, not approachable yet")
     }
 }

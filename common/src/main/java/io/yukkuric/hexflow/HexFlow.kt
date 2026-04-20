@@ -9,7 +9,7 @@ object HexFlow {
     const val MOD_ID: String = "hexflow"
     val LOGGER: Logger = LogUtils.getLogger()
     fun flowModLoc(path: String): ResourceLocation {
-        return ResourceLocation(MOD_ID, path)
+        return ResourceLocation.tryBuild(MOD_ID, path)!!
     }
 
     @JvmStatic

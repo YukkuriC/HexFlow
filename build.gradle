@@ -67,7 +67,7 @@ subprojects {
         modImplementation "curse.maven:curios-309927:5066845"
         modImplementation "curse.maven:cloth-config-348521:5729105"
         // interop dep
-        modImplementation "curse.maven:hexparse-1148731:7676910"
+        // modImplementation "curse.maven:hexparse-1148731:7676910"
         // helpers in runClient
         // modImplementation "curse.maven:jade-324717:6855440"
         modImplementation "curse.maven:just-enough-characters-250702:7411324"

@@ -9,13 +9,9 @@ import at.petrak.hexcasting.api.casting.eval.vm.FrameEvaluate
 import at.petrak.hexcasting.api.casting.eval.vm.SpellContinuation
 import at.petrak.hexcasting.api.casting.iota.Iota
 import at.petrak.hexcasting.api.casting.iota.ListIota
-import at.petrak.hexcasting.api.utils.NBTBuilder
-import at.petrak.hexcasting.api.utils.getList
-import at.petrak.hexcasting.api.utils.serializeToNBT
 import at.petrak.hexcasting.common.lib.hex.HexEvalSounds
-import at.petrak.hexcasting.common.lib.hex.HexIotaTypes
-import net.minecraft.nbt.CompoundTag
-import net.minecraft.nbt.Tag
+import com.mojang.serialization.codecs.RecordCodecBuilder
+import net.minecraft.network.codec.StreamCodec
 import net.minecraft.server.level.ServerLevel
 
 data class FrameReduce(
@@ -55,18 +51,25 @@ data class FrameReduce(
         )
     }
 
-    override fun serializeToNBT() = NBTBuilder {
-        "data" %= data.serializeToNBT()
-        "code" %= code.serializeToNBT()
-    }
-
     companion object {
         @JvmField
         val TYPE: ContinuationFrame.Type<FrameReduce> = object : ContinuationFrame.Type<FrameReduce> {
-            override fun deserializeFromNBT(tag: CompoundTag, world: ServerLevel) = FrameReduce(
-                HexIotaTypes.LIST.deserialize(tag.getList("data", Tag.TAG_COMPOUND), world)!!.list,
-                HexIotaTypes.LIST.deserialize(tag.getList("code", Tag.TAG_COMPOUND), world)!!.list,
+            val CODEC = RecordCodecBuilder.mapCodec<FrameReduce> { inst ->
+                inst.group(
+                    SpellList.CODEC.fieldOf("data").forGetter { it.data },
+                    SpellList.CODEC.fieldOf("code").forGetter { it.code },
+                ).apply(inst, ::FrameReduce)
+            }
+
+            val STREAM_CODEC = StreamCodec.composite(
+                SpellList.STREAM_CODEC, FrameReduce::data,
+                SpellList.STREAM_CODEC, FrameReduce::code,
+                ::FrameReduce
             )
+
+            override fun codec() = CODEC
+
+            override fun streamCodec() = STREAM_CODEC
         }
     }
 }

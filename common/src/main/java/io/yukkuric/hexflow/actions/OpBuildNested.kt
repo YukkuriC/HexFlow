@@ -4,9 +4,9 @@ import at.petrak.hexcasting.api.casting.castables.ConstMediaAction
 import at.petrak.hexcasting.api.casting.eval.CastingEnvironment
 import at.petrak.hexcasting.api.casting.getInt
 import at.petrak.hexcasting.api.casting.iota.Iota
-import at.petrak.hexcasting.api.casting.iota.IotaType
 import at.petrak.hexcasting.api.casting.iota.ListIota
 import at.petrak.hexcasting.api.casting.mishaps.MishapInvalidIota
+import io.yukkuric.hexflow.helpers.deepCopy
 
 // (114,(1919),514),num_-3,build_nested
 object OpBuildNested : ConstMediaAction {
@@ -22,7 +22,7 @@ object OpBuildNested : ConstMediaAction {
         // do copy
         val toModify = ArrayList<Iota>()
         orig.list.forEach(toModify::add)
-        toModify[idx] = IotaType.deserialize(IotaType.serialize(orig), env.world)
+        toModify[idx] = orig.deepCopy(env.world.registryAccess())
         return listOf(ListIota(toModify))
     }
 }
