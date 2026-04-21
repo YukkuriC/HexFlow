@@ -1,4 +1,5 @@
 **/libs/**/*.jar
+**/libsRaw/**/*.jar
 
 # hexdoc
 _site/
