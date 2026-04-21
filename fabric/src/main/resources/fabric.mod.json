@@ -24,6 +24,7 @@
     ]
   },
   "mixins": [
+    "hexflow.mixins.json"
   ],
   "depends": {
     "fabricloader": ">=0.16.9",
