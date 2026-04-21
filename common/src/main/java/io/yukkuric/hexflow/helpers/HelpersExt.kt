@@ -11,9 +11,9 @@ import net.minecraft.world.phys.Vec3
 val Vec3.attachCenter
     get() = Vec3(0.5 + Mth.floor(x), 0.5 + Mth.floor(y), 0.5 + Mth.floor(z))
 
-fun Iota.deepCopy(regAccess: RegistryAccess): Iota {
+fun <T : Iota> T.deepCopy(regAccess: RegistryAccess): T {
     var buf = RegistryFriendlyByteBuf(Unpooled.buffer(), regAccess)
     IotaType.TYPED_STREAM_CODEC.encode(buf, this)
     buf = RegistryFriendlyByteBuf(Unpooled.wrappedBuffer(buf.readByteArray()), regAccess)
-    return IotaType.TYPED_STREAM_CODEC.decode(buf)
+    return IotaType.TYPED_STREAM_CODEC.decode(buf) as T
 }
