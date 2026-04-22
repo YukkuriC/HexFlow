@@ -6,6 +6,8 @@
   "client": [
   ],
   "mixins": [
+    "MixinSpellList$LList",
+    "MixinSpellList$LPair"
   ],
   "injectors": {
     "defaultRequire": 1
