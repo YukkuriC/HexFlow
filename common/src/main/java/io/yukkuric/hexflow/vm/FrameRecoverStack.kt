@@ -30,7 +30,7 @@ data class FrameRecoverStack(val myStack: List<Iota>) : ContinuationFrame {
 
     override fun evaluate(continuation: SpellContinuation, level: ServerLevel, harness: CastingVM): CastResult {
         return CastResult(
-            NullIota.INSTANCE,
+            NullIota(),
             continuation,
             // reset escapes so they don't carry over to other iterations or out of thoth
             harness.image.copy(stack = recoverAnyway(harness.image.stack)),

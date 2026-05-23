@@ -75,8 +75,8 @@ subprojects {
 
         modImplementation fileTree(dir: "libs/$minecraft_version", include: '*.jar')
         modImplementation fileTree(dir: "../libs/$minecraft_version", include: '*.jar')
-        modImplementation fileTree(dir: "libsRaw/$minecraft_version", include: '*.jar')
-        modImplementation fileTree(dir: "../libsRaw/$minecraft_version", include: '*.jar')
+        implementation fileTree(dir: "libsRaw/$minecraft_version", include: '*.jar')
+        implementation fileTree(dir: "../libsRaw/$minecraft_version", include: '*.jar')
     }
 
     java {
