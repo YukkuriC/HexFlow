@@ -5,6 +5,7 @@ import at.petrak.hexcasting.api.casting.eval.OperationResult
 import at.petrak.hexcasting.api.casting.eval.vm.FrameForEach
 import at.petrak.hexcasting.api.casting.getList
 import at.petrak.hexcasting.api.mod.HexConfig
+import at.petrak.hexcasting.api.utils.TreeList
 import at.petrak.hexcasting.common.lib.hex.HexEvalSounds
 import io.yukkuric.hexflow.vm.FrameRecoverStack
 
@@ -33,7 +34,7 @@ open class AbstractThoth : ActionBound() {
         if (isPure) resultPureThoth(code, data) else resultThoth(code, data)
 
     fun resultThoth(code: SpellList, data: SpellList): OperationResult {
-        val frameThoth = FrameForEach(data, code, null, mutableListOf())
+        val frameThoth = FrameForEach(data, code, null, TreeList.from(listOf()))
         return OperationResult(
             image.copy(opsConsumed = image.opsConsumed + 1, stack = stack),
             listOf(),
@@ -43,7 +44,7 @@ open class AbstractThoth : ActionBound() {
     }
 
     fun resultPureThoth(code: SpellList, data: SpellList): OperationResult {
-        val frameThoth = FrameForEach(data, code, listOf(), mutableListOf())
+        val frameThoth = FrameForEach(data, code, listOf(), TreeList.from(listOf()))
         val frameKeepFrame = FrameRecoverStack(stack)
         return OperationResult(
             image.copy(opsConsumed = image.opsConsumed + 1, stack = listOf()),
