@@ -1,9 +1,9 @@
 package io.yukkuric.hexflow.actions.base
 
-import at.petrak.hexcasting.api.casting.SpellList
 import at.petrak.hexcasting.api.casting.eval.OperationResult
 import at.petrak.hexcasting.api.casting.eval.vm.FrameForEach
 import at.petrak.hexcasting.api.casting.getList
+import at.petrak.hexcasting.api.casting.iota.Iota
 import at.petrak.hexcasting.api.mod.HexConfig
 import at.petrak.hexcasting.api.utils.TreeList
 import at.petrak.hexcasting.common.lib.hex.HexEvalSounds
@@ -16,7 +16,7 @@ open class AbstractThoth : ActionBound() {
     open val isPure: Boolean = true
 
     // built data & args count
-    open fun getData(): Pair<SpellList, Int> {
+    open fun getData(): Pair<TreeList<Iota>, Int> {
         val ret = stack.getList(stack.lastIndex, stack.size)
         return Pair(ret, 1)
     }
@@ -30,10 +30,10 @@ open class AbstractThoth : ActionBound() {
         return doThoth(instrs, datums)
     }
 
-    open fun doThoth(code: SpellList, data: SpellList) =
+    open fun doThoth(code: TreeList<Iota>, data: TreeList<Iota>) =
         if (isPure) resultPureThoth(code, data) else resultThoth(code, data)
 
-    fun resultThoth(code: SpellList, data: SpellList): OperationResult {
+    fun resultThoth(code: TreeList<Iota>, data: TreeList<Iota>): OperationResult {
         val frameThoth = FrameForEach(data, code, null, TreeList.from(listOf()))
         return OperationResult(
             image.copy(opsConsumed = image.opsConsumed + 1, stack = stack),
@@ -43,11 +43,11 @@ open class AbstractThoth : ActionBound() {
         )
     }
 
-    fun resultPureThoth(code: SpellList, data: SpellList): OperationResult {
-        val frameThoth = FrameForEach(data, code, listOf(), TreeList.from(listOf()))
+    fun resultPureThoth(code: TreeList<Iota>, data: TreeList<Iota>): OperationResult {
+        val frameThoth = FrameForEach(data, code, TreeList.empty(), TreeList.from(listOf()))
         val frameKeepFrame = FrameRecoverStack(stack)
         return OperationResult(
-            image.copy(opsConsumed = image.opsConsumed + 1, stack = listOf()),
+            image.copy(opsConsumed = image.opsConsumed + 1, stack = TreeList.empty()),
             listOf(),
             continuation.pushFrame(frameKeepFrame).pushFrame(frameThoth),
             HexEvalSounds.THOTH

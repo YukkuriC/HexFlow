@@ -1,11 +1,12 @@
 package io.yukkuric.hexflow.actions.thoth
 
-import at.petrak.hexcasting.api.casting.SpellList
 import at.petrak.hexcasting.api.casting.eval.env.CircleCastEnv
 import at.petrak.hexcasting.api.casting.getBlockPos
 import at.petrak.hexcasting.api.casting.getIntBetween
+import at.petrak.hexcasting.api.casting.iota.Iota
 import at.petrak.hexcasting.api.casting.iota.Vec3Iota
 import at.petrak.hexcasting.api.casting.mishaps.MishapStackSize
+import at.petrak.hexcasting.api.utils.TreeList
 import io.yukkuric.hexflow.actions.base.AbstractThoth
 import net.minecraft.core.BlockPos
 import kotlin.math.abs
@@ -14,7 +15,7 @@ import kotlin.math.abs
 // (print,break_block)(#my_aim,raycast,add)(vec_-1_-1_-1,vec_1_1_1)pure_map,splat,for_range/cube
 // (pop)(vec,vec_114514_1919810_19260817)splat,for_range/cube
 class OpCubeFor(override val isPure: Boolean) : AbstractThoth() {
-    override fun getData(): Pair<SpellList, Int> {
+    override fun getData(): Pair<TreeList<Iota>, Int> {
         val size = stack.size
         val optionOffset = countOptionNums(1)
         val option = when (optionOffset) {
@@ -45,6 +46,6 @@ class OpCubeFor(override val isPure: Boolean) : AbstractThoth() {
             }
         }
 
-        return Pair(SpellList.LList(pts.map(::Vec3Iota)), 2 + optionOffset)
+        return Pair(TreeList.from(pts.map(::Vec3Iota)), 2 + optionOffset)
     }
 }

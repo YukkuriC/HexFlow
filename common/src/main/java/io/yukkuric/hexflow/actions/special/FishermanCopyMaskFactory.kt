@@ -8,6 +8,7 @@ import at.petrak.hexcasting.api.casting.eval.vm.CastingImage
 import at.petrak.hexcasting.api.casting.eval.vm.SpellContinuation
 import at.petrak.hexcasting.api.casting.math.HexPattern
 import at.petrak.hexcasting.api.casting.mishaps.MishapNotEnoughArgs
+import at.petrak.hexcasting.api.utils.TreeList
 import at.petrak.hexcasting.api.utils.lightPurple
 import at.petrak.hexcasting.common.lib.hex.HexEvalSounds
 import it.unimi.dsi.fastutil.booleans.BooleanArrayList
@@ -33,7 +34,7 @@ object FishermanCopyMaskFactory : SpecialHandler.Factory<FishermanCopyMaskFactor
             }
             return OperationResult(
                 image.copy(
-                    stack = newStack,
+                    stack = TreeList.from(newStack),
                     opsConsumed = image.opsConsumed + 1
                 ),
                 listOf(),

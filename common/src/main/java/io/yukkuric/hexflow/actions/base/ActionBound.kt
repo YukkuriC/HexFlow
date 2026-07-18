@@ -8,12 +8,13 @@ import at.petrak.hexcasting.api.casting.eval.vm.SpellContinuation
 import at.petrak.hexcasting.api.casting.iota.DoubleIota
 import at.petrak.hexcasting.api.casting.iota.Iota
 import at.petrak.hexcasting.api.casting.mishaps.MishapNotEnoughArgs
+import at.petrak.hexcasting.api.utils.TreeList
 
 abstract class ActionBound : Action {
     protected lateinit var image: CastingImage
     protected lateinit var env: CastingEnvironment
     protected lateinit var continuation: SpellContinuation
-    protected lateinit var stack: MutableList<Iota>
+    protected lateinit var stack: TreeList<Iota>
 
     abstract fun operateBound(): OperationResult
 
@@ -27,7 +28,7 @@ abstract class ActionBound : Action {
         this.env = env
         this.image = image
         this.continuation = continuation
-        stack = image.stack.toMutableList()
+        stack = image.stack
         return operateBound()
     }
 

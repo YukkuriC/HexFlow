@@ -1,11 +1,12 @@
 package io.yukkuric.hexflow.actions.thoth
 
-import at.petrak.hexcasting.api.casting.SpellList
 import at.petrak.hexcasting.api.casting.getIntBetween
 import at.petrak.hexcasting.api.casting.getPositiveInt
 import at.petrak.hexcasting.api.casting.getVec3
+import at.petrak.hexcasting.api.casting.iota.Iota
 import at.petrak.hexcasting.api.casting.iota.Vec3Iota
 import at.petrak.hexcasting.api.casting.mishaps.MishapStackSize
+import at.petrak.hexcasting.api.utils.TreeList
 import io.yukkuric.hexflow.actions.base.AbstractThoth
 import io.yukkuric.hexflow.helpers.attachCenter
 import net.minecraft.util.Mth
@@ -20,7 +21,7 @@ import kotlin.math.abs
     (2,100)splat,for_range/line
  */
 class OpLineFor(override val isPure: Boolean) : AbstractThoth() {
-    override fun getData(): Pair<SpellList, Int> {
+    override fun getData(): Pair<TreeList<Iota>, Int> {
         val size = stack.size
         val optionOffset = countOptionNums(2)
 
@@ -58,7 +59,7 @@ class OpLineFor(override val isPure: Boolean) : AbstractThoth() {
         if (hasEnd) append(pos2)
 
         return Pair(
-            SpellList.LList(pts.map(::Vec3Iota)), 2 + optionOffset
+            TreeList.from(pts.map(::Vec3Iota)), 2 + optionOffset
         )
     }
 }

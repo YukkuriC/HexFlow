@@ -1,6 +1,5 @@
 package io.yukkuric.hexflow.actions
 
-import at.petrak.hexcasting.api.casting.SpellList
 import at.petrak.hexcasting.api.casting.castables.Action
 import at.petrak.hexcasting.api.casting.eval.CastingEnvironment
 import at.petrak.hexcasting.api.casting.eval.OperationResult
@@ -14,6 +13,7 @@ import at.petrak.hexcasting.api.casting.iota.Iota
 import at.petrak.hexcasting.api.casting.iota.ListIota
 import at.petrak.hexcasting.api.casting.mishaps.MishapInvalidIota
 import at.petrak.hexcasting.api.casting.mishaps.MishapNotEnoughArgs
+import at.petrak.hexcasting.api.utils.TreeList
 import at.petrak.hexcasting.common.lib.hex.HexEvalSounds
 import io.yukkuric.hexflow.vm.FrameRecoverStack
 
@@ -37,7 +37,7 @@ object OpCallStack : Action {
         }
         val topIota = stack.removeLastOrNull()!!
         val code = if (topIota is ListIota) topIota.list
-        else if (topIota.executable()) SpellList.LList(listOf(topIota))
+        else if (topIota.executable()) TreeList.from(listOf(topIota))
         else throw MishapInvalidIota.of(topIota, codeIdx, "evaluatable")
 
         // stack & cont
@@ -52,7 +52,7 @@ object OpCallStack : Action {
         // result
         return OperationResult(
             image.copy(
-                stack = innerStack,
+                stack = TreeList.from(innerStack),
                 opsConsumed = image.opsConsumed + 1
             ),
             listOf(),

@@ -8,6 +8,7 @@ import at.petrak.hexcasting.api.casting.eval.vm.SpellContinuation
 import at.petrak.hexcasting.api.casting.iota.Iota
 import at.petrak.hexcasting.api.casting.iota.IotaType
 import at.petrak.hexcasting.api.casting.iota.NullIota
+import at.petrak.hexcasting.api.utils.TreeList
 import at.petrak.hexcasting.common.lib.hex.HexEvalSounds
 import com.mojang.serialization.codecs.RecordCodecBuilder
 import net.minecraft.network.codec.ByteBufCodecs
@@ -18,13 +19,13 @@ data class FrameRecoverStack(val myStack: List<Iota>) : ContinuationFrame {
     override val type = TYPE
     override fun size() = myStack.size
 
-    fun recoverAnyway(stack: List<Iota>): MutableList<Iota> {
+    fun recoverAnyway(stack: List<Iota>): TreeList<Iota> {
         val newStack = myStack.toMutableList()
         newStack.addAll(stack)
-        return newStack
+        return TreeList.from(newStack)
     }
 
-    override fun breakDownwards(stack: List<Iota>): Pair<Boolean, List<Iota>> {
+    override fun breakDownwards(stack: TreeList<Iota>): Pair<Boolean, TreeList<Iota>> {
         return false to recoverAnyway(stack)
     }
 

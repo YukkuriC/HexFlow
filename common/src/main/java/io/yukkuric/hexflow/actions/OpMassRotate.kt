@@ -10,6 +10,7 @@ import at.petrak.hexcasting.api.casting.getPositiveInt
 import at.petrak.hexcasting.api.casting.iota.DoubleIota
 import at.petrak.hexcasting.api.casting.mishaps.MishapInvalidIota
 import at.petrak.hexcasting.api.casting.mishaps.MishapNotEnoughArgs
+import at.petrak.hexcasting.api.utils.TreeList
 import at.petrak.hexcasting.common.casting.actions.stack.OpTwiddling
 import kotlin.math.roundToInt
 
@@ -28,14 +29,18 @@ object OpMassRotate : Action {
         repeat(2) { stack.removeLastOrNull() }
         val orders = mutableListOf<Int>()
         var idx = 0
-        while (rawOrders.nonEmpty) {
-            val ptr = rawOrders.car
+        while (rawOrders.isNotEmpty()) {
+            val ptr = rawOrders.head()
             if (ptr !is DoubleIota) throw MishapInvalidIota.of(ptr, idx, "int")
             val order = ptr.double.roundToInt()
             if (order < 0 || order >= range) throw MishapInvalidIota.of(ptr, idx, "int.between", 0, range)
             orders.add(order)
-            rawOrders = rawOrders.cdr; idx++
+            rawOrders = rawOrders.tail(); idx++
         }
-        return OpTwiddling(range, orders.toIntArray()).operate(env, image.copy(stack = stack), continuation)
+        return OpTwiddling(range, orders.toIntArray()).operate(
+            env,
+            image.copy(stack = TreeList.from(stack)),
+            continuation
+        )
     }
 }

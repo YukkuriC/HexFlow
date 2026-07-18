@@ -16,7 +16,7 @@ object OpBuildNested : ConstMediaAction {
         val orig = args.get(0)
         if (orig !is ListIota) throw MishapInvalidIota.ofType(orig, 0, "list")
         var idx = args.getInt(1)
-        val n = orig.list.size()
+        val n = orig.list.size
         if (idx < 0) idx += n
         if (idx >= n) return listOf(orig)
         // do copy
