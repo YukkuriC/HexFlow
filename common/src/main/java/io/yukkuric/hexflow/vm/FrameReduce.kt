@@ -28,7 +28,7 @@ data class FrameReduce(
     }
 
     override fun evaluate(continuation: SpellContinuation, level: ServerLevel, harness: CastingVM): CastResult {
-        var stack: TreeList<Iota> = harness.image.stack
+        val stack = harness.image.stack.toMutableList()
 
         // If we still have data to process...
         val (newImage, newCont) = if (data.isNotEmpty()) {
@@ -44,7 +44,7 @@ data class FrameReduce(
         return CastResult(
             ListIota(code),
             newCont,
-            newImage.withResetEscape().copy(stack = stack),
+            newImage.withResetEscape().copy(stack = TreeList.from(stack)),
             listOf(),
             ResolvedPatternType.EVALUATED,
             HexEvalSounds.THOTH,

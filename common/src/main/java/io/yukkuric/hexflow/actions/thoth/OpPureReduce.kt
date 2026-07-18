@@ -16,7 +16,7 @@ object OpPureReduce : AbstractThoth() {
         if (data.size < 2) {
             stack.add(ListIota(data))
             return OperationResult(
-                image.copy(opsConsumed = image.opsConsumed + 1, stack = stack),
+                image.copy(opsConsumed = image.opsConsumed + 1, stack = treeStack),
                 listOf(),
                 continuation,
                 HexEvalSounds.THOTH

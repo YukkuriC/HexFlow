@@ -14,7 +14,9 @@ abstract class ActionBound : Action {
     protected lateinit var image: CastingImage
     protected lateinit var env: CastingEnvironment
     protected lateinit var continuation: SpellContinuation
-    protected lateinit var stack: TreeList<Iota>
+    protected lateinit var stack: MutableList<Iota>
+    val treeStack: TreeList<Iota>
+        get() = TreeList.from(stack)
 
     abstract fun operateBound(): OperationResult
 
@@ -28,7 +30,7 @@ abstract class ActionBound : Action {
         this.env = env
         this.image = image
         this.continuation = continuation
-        stack = image.stack
+        stack = image.stack.toMutableList()
         return operateBound()
     }
 

@@ -36,7 +36,7 @@ open class AbstractThoth : ActionBound() {
     fun resultThoth(code: TreeList<Iota>, data: TreeList<Iota>): OperationResult {
         val frameThoth = FrameForEach(data, code, null, TreeList.from(listOf()))
         return OperationResult(
-            image.copy(opsConsumed = image.opsConsumed + 1, stack = stack),
+            image.copy(opsConsumed = image.opsConsumed + 1, stack = treeStack),
             listOf(),
             continuation.pushFrame(frameThoth),
             HexEvalSounds.THOTH
