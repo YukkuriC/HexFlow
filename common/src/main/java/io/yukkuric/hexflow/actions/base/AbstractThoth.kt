@@ -7,7 +7,6 @@ import at.petrak.hexcasting.api.casting.iota.Iota
 import at.petrak.hexcasting.api.mod.HexConfig
 import at.petrak.hexcasting.api.utils.TreeList
 import at.petrak.hexcasting.common.lib.hex.HexEvalSounds
-import io.yukkuric.hexflow.vm.FrameRecoverStack
 
 // [code], ...args -> thoth(code, getData(args))
 // also default impl. for PureMap
@@ -34,9 +33,9 @@ open class AbstractThoth : ActionBound() {
         if (isPure) resultPureThoth(code, data) else resultThoth(code, data)
 
     fun resultThoth(code: TreeList<Iota>, data: TreeList<Iota>): OperationResult {
-        val frameThoth = FrameForEach(data, code, null, TreeList.from(listOf()))
+        val frameThoth = FrameForEach(data, code, treeStack, treeStack, TreeList.empty())
         return OperationResult(
-            image.copy(opsConsumed = image.opsConsumed + 1, stack = treeStack),
+            image.copy(opsConsumed = image.opsConsumed + 1, stack = TreeList.empty()),
             listOf(),
             continuation.pushFrame(frameThoth),
             HexEvalSounds.THOTH
@@ -44,12 +43,11 @@ open class AbstractThoth : ActionBound() {
     }
 
     fun resultPureThoth(code: TreeList<Iota>, data: TreeList<Iota>): OperationResult {
-        val frameThoth = FrameForEach(data, code, TreeList.empty(), TreeList.from(listOf()))
-        val frameKeepFrame = FrameRecoverStack(stack)
+        val frameThoth = FrameForEach(data, code, TreeList.empty(), TreeList.from(stack), TreeList.empty())
         return OperationResult(
             image.copy(opsConsumed = image.opsConsumed + 1, stack = TreeList.empty()),
             listOf(),
-            continuation.pushFrame(frameKeepFrame).pushFrame(frameThoth),
+            continuation.pushFrame(frameThoth),
             HexEvalSounds.THOTH
         )
     }
