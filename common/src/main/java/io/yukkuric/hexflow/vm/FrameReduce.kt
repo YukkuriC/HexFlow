@@ -28,7 +28,7 @@ data class FrameReduce(
     }
 
     override fun evaluate(continuation: SpellContinuation, level: ServerLevel, harness: CastingVM): CastResult {
-        val stack = harness.image.stack.toMutableList()
+        var stack = harness.image.stack.toMutableList()
 
         // If we still have data to process...
         val (newImage, newCont) = if (data.isNotEmpty()) {
@@ -39,6 +39,7 @@ data class FrameReduce(
             Pair(harness.image.withUsedOp(), cont2)
         } else {
             // pack whole stack finally
+            stack = mutableListOf(ListIota(stack))
             Pair(harness.image, continuation)
         }
         return CastResult(
