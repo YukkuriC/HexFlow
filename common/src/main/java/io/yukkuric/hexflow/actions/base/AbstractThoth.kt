@@ -2,6 +2,7 @@ package io.yukkuric.hexflow.actions.base
 
 import at.petrak.hexcasting.api.casting.eval.OperationResult
 import at.petrak.hexcasting.api.casting.eval.vm.FrameForEach
+import at.petrak.hexcasting.api.casting.evaluatable
 import at.petrak.hexcasting.api.casting.getList
 import at.petrak.hexcasting.api.casting.iota.Iota
 import at.petrak.hexcasting.api.mod.HexConfig
@@ -21,7 +22,8 @@ open class AbstractThoth(open val isPure: Boolean = true) : ActionBound() {
     override fun operateBound(): OperationResult {
         val (datums, usedArgs) = getData()
         assertArgCount(usedArgs + 1)
-        val instrs = stack.getList(stack.lastIndex - usedArgs, stack.size)
+        val instrs = evaluatable(stack[stack.lastIndex - usedArgs], usedArgs)
+            .map({ TreeList.from(listOf(it)) }, { it })
         dropStack(usedArgs + 1)
 
         return doThoth(instrs, datums)

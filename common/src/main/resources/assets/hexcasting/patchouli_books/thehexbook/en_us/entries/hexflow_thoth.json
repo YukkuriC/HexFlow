@@ -8,7 +8,7 @@
 			"type": "hexcasting:pattern",
 			"op_id": "hexflow:pure_map",
 			"anchor": "hexflow:pure_map",
-			"input": "list, list",
+			"input": "evaluatable, list",
 			"output": "list",
 			"text": "book.descrip.hexflow:pure_map"
 		},
@@ -16,7 +16,7 @@
 			"type": "hexcasting:pattern",
 			"op_id": "hexflow:old_thoth",
 			"anchor": "hexflow:old_thoth",
-			"input": "many, list, list",
+			"input": "many, evaluatable, list",
 			"output": "list",
 			"text": "book.descrip.hexflow:old_thoth"
 		},
@@ -24,7 +24,7 @@
 			"type": "hexcasting:pattern",
 			"op_id": "hexflow:pure_reduce",
 			"anchor": "hexflow:pure_reduce",
-			"input": "list, list",
+			"input": "evaluatable, list",
 			"output": "list",
 			"text": "book.descrip.hexflow:pure_reduce"
 		},
@@ -32,7 +32,7 @@
 			"type": "hexcasting:pattern",
 			"op_id": "hexflow:for_range/cube",
 			"anchor": "hexflow:for_range/cube",
-			"input": "list, vec, vec(, int)",
+			"input": "evaluatable, vec, vec(, int)",
 			"output": "list",
 			"text": "book.descrip.hexflow:for_range/cube"
 		},
@@ -41,7 +41,7 @@
 			"type": "hexcasting:pattern",
 			"op_id": "hexflow:for_range/line",
 			"anchor": "hexflow:for_range/line",
-			"input": "list, vec, vec(, int(, int))",
+			"input": "evaluatable, vec, vec(, int(, int))",
 			"output": "list",
 			"text": "book.descrip.hexflow:for_range/line"
 		},
@@ -50,7 +50,7 @@
 			"type": "hexcasting:pattern",
 			"op_id": "hexflow:for_range/floodfill",
 			"anchor": "hexflow:for_range/floodfill",
-			"input": "list, vec(, int(, int))",
+			"input": "evaluatable, vec(, int(, int))",
 			"output": "list",
 			"text": "book.descrip.hexflow:for_range/floodfill"
 		},
@@ -59,7 +59,7 @@
 			"type": "hexcasting:pattern",
 			"op_id": "hexflow:for_range/cube/pure",
 			"anchor": "hexflow:for_range/cube/pure",
-			"input": "list, vec, vec(, int)",
+			"input": "evaluatable, vec, vec(, int)",
 			"output": "list",
 			"text": "book.descrip.hexflow:for_range/?/pure"
 		},
@@ -67,7 +67,7 @@
 			"type": "hexcasting:pattern",
 			"op_id": "hexflow:for_range/line/pure",
 			"anchor": "hexflow:for_range/line/pure",
-			"input": "list, vec, vec(, int(, int))",
+			"input": "evaluatable, vec, vec(, int(, int))",
 			"output": "list",
 			"text": "book.descrip.hexflow:for_range/?/pure.2"
 		},
@@ -75,7 +75,7 @@
 			"type": "hexcasting:pattern",
 			"op_id": "hexflow:for_range/floodfill/pure",
 			"anchor": "hexflow:for_range/floodfill/pure",
-			"input": "list, vec(, int(, int))",
+			"input": "evaluatable, vec(, int(, int))",
 			"output": "list",
 			"text": "book.descrip.hexflow:for_range/?/pure.2"
 		}
