@@ -14,6 +14,7 @@ _read HexBook for more details_
 
 - LOTS of thoth
     - pure thoth
+    - old-fashioned thoth
     - pure reduce
     - iterate inside cuboid
     - iterate on straight line

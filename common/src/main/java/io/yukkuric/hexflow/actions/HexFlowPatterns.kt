@@ -20,6 +20,7 @@ class HexFlowPatterns {
 
         init {
             wrap("pure_map", "dadadad", HexDir.NORTH_EAST, AbstractThoth())
+            wrap("old_thoth", "dadad", HexDir.NORTH_EAST, AbstractThoth(false))
             wrap("pure_reduce", "waawadadad", HexDir.NORTH_EAST, OpPureReduce)
             wrap("for_range/cube", "dadadqqaqqqqq", HexDir.NORTH_EAST, OpCubeFor(false))
             wrap("for_range/cube/pure", "dadadadqqaqqqqq", HexDir.NORTH_EAST, OpCubeFor(true))

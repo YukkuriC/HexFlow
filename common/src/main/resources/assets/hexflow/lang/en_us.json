@@ -1,5 +1,6 @@
 {
   "hexcasting.action.hexflow:pure_map": "Nehmetawy's Gambit",
+  "hexcasting.action.hexflow:old_thoth": "Ancient Thoth's Gambit",
   "hexcasting.action.hexflow:pure_reduce": "Conway's Gambit",
   "hexcasting.action.hexflow:for_range/cube": "Rubik's Gambit",
   "hexcasting.action.hexflow:for_range/cube/pure": "Pure Rubik's Gambit",
@@ -18,7 +19,8 @@
   "hexcasting.action.hexflow:call_stack": "Hanoi's Gambit",
   "hexflow.book.entry": "HexFlow Patterns",
   "hexflow.book.entry.thoth": "HexFlow \"Thoth\"s",
-  "book.descrip.hexflow:pure_map": "Similar to $(l:patterns/meta#hexcasting:for_each)$(action)Thoth's Gambit/$, but won't copy the original stack inside each sub-execution.",
+  "book.descrip.hexflow:pure_map": "Similar to $(l:patterns/meta#hexcasting:for_each)$(action)Thoth's Gambit/$, with 0 parameters.",
+  "book.descrip.hexflow:old_thoth": "The old-fashioned $(l:patterns/meta#hexcasting:for_each)$(action)Thoth's Gambit/$, copies the original stack inside each sub-execution.",
   "book.descrip.hexflow:pure_reduce": "Similar to $(l:patterns/meta#hexcasting:for_each)$(action)Thoth's Gambit/$; for data list with length $(bold)n/$, it executes $(bold)n - 1/$ times; The first initial stack is the first two elements, and each subsequent execution uses the stack after the last execution.",
   "book.descrip.hexflow:for_range/cube": "Executes given list on each point as initial iota inside the cuboid defined by given 2 points as body diagonal.",
   "book.descrip.hexflow:for_range/cube.2": "Optional number (valid range: $(bold)0 - 3/$) stands for their iteration order: $(bold)0/$ (by default) for no sorting, $(bold)1/$ for nearest first, $(bold)2/$ for farthest first, and $(bold)3/$ for randomly shuffled.",

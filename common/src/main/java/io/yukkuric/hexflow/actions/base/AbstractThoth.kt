@@ -11,9 +11,7 @@ import at.petrak.hexcasting.common.lib.hex.HexEvalSounds
 // [code], ...args -> thoth(code, getData(args))
 // also default impl. for PureMap
 // (comment_polluted)splat,(duplicate,bool_coerce,(stack_len,last_n_list,halt)unappend,if,eval)(1,1,4,5,null,4)pure_map,print,pop,print
-open class AbstractThoth : ActionBound() {
-    open val isPure: Boolean = true
-
+open class AbstractThoth(open val isPure: Boolean = true) : ActionBound() {
     // built data & args count
     open fun getData(): Pair<TreeList<Iota>, Int> {
         val ret = stack.getList(stack.lastIndex, stack.size)
