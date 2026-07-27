@@ -12,5 +12,5 @@ object OpWeakEscape : Action {
         env: CastingEnvironment,
         image: CastingImage,
         continuation: SpellContinuation
-    ) = OperationResult(image.copy(escapeNext = true), listOf(), continuation, HexEvalSounds.NORMAL_EXECUTE)
+    ) = OperationResult(image.copy(escapeNext = true), listOf(), continuation, HexEvalSounds.NORMAL_EXECUTE.get())
 }

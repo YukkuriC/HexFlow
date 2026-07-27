@@ -37,7 +37,7 @@ data class FrameRecoverStack(val myStack: List<Iota>) : ContinuationFrame {
             harness.image.copy(stack = recoverAnyway(harness.image.stack)),
             listOf(),
             ResolvedPatternType.EVALUATED,
-            HexEvalSounds.NOTHING,
+            HexEvalSounds.NOTHING.get(),
         )
     }
 

@@ -57,7 +57,7 @@ object OpCallStack : Action {
             ),
             listOf(),
             newCont,
-            HexEvalSounds.HERMES
+            HexEvalSounds.HERMES.get()
         )
     }
 }

@@ -48,7 +48,7 @@ data class FrameReduce(
             newImage.withResetEscape().copy(stack = TreeList.from(stack)),
             listOf(),
             ResolvedPatternType.EVALUATED,
-            HexEvalSounds.THOTH,
+            HexEvalSounds.THOTH.get(),
         )
     }
 

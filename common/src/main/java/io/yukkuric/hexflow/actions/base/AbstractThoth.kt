@@ -38,7 +38,7 @@ open class AbstractThoth(open val isPure: Boolean = true) : ActionBound() {
             image.copy(opsConsumed = image.opsConsumed + 1, stack = TreeList.empty()),
             listOf(),
             continuation.pushFrame(frameThoth),
-            HexEvalSounds.THOTH
+            HexEvalSounds.THOTH.get()
         )
     }
 
@@ -48,7 +48,7 @@ open class AbstractThoth(open val isPure: Boolean = true) : ActionBound() {
             image.copy(opsConsumed = image.opsConsumed + 1, stack = TreeList.empty()),
             listOf(),
             continuation.pushFrame(frameThoth),
-            HexEvalSounds.THOTH
+            HexEvalSounds.THOTH.get()
         )
     }
 

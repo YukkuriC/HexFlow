@@ -39,7 +39,7 @@ object FishermanCopyMaskFactory : SpecialHandler.Factory<FishermanCopyMaskFactor
                 ),
                 listOf(),
                 continuation,
-                HexEvalSounds.NORMAL_EXECUTE
+                HexEvalSounds.NORMAL_EXECUTE.get()
             )
         }
 

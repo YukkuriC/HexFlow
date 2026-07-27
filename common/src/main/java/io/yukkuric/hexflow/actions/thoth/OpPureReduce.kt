@@ -19,7 +19,7 @@ object OpPureReduce : AbstractThoth() {
                 image.copy(opsConsumed = image.opsConsumed + 1, stack = treeStack),
                 listOf(),
                 continuation,
-                HexEvalSounds.THOTH
+                HexEvalSounds.THOTH.get()
             )
         }
 
@@ -34,7 +34,7 @@ object OpPureReduce : AbstractThoth() {
             newImg,
             listOf(),
             continuation.pushFrame(frameKeepFrame).pushFrame(frameThoth),
-            HexEvalSounds.THOTH
+            HexEvalSounds.THOTH.get()
         )
     }
 }
