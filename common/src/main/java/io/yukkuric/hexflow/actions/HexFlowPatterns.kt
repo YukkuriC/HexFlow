@@ -38,6 +38,7 @@ class HexFlowPatterns {
                 HexDir.NORTH_EAST,
                 OpFloodFillFor(true)
             )
+            wrap("inf_loop", "wdwddwdwddwdw", HexDir.NORTH_EAST, OpInfiniteLoop)
 
 
             wrap("build_nested", "edqdeqdwewwdwqwdwwew", HexDir.SOUTH_WEST, OpBuildNested)

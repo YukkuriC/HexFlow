@@ -19,6 +19,8 @@ _read HexBook for more details_
     - iterate inside cuboid
     - iterate on straight line
     - (great spell) floodfill BFS by block type
+- with non-Thoth loops
+    - yet another infinite-loop(evaluatable) pattern
 - build_nested(list,num)
 - nested_modify(list,list,any)
 - noob num evaluator
