@@ -70,6 +70,22 @@
 			"input": "list, vec(, int(, int))",
 			"output": "list",
 			"text": "book.descrip.hexflow:for_range/?/pure.2"
+		},
+		{
+			"type": "hexcasting:pattern",
+			"op_id": "hexflow:inf_loop",
+			"anchor": "hexflow:inf_loop",
+			"input": "evaluatable",
+			"output": "",
+			"text": "book.descrip.hexflow:inf_loop"
+		},
+		{
+			"type": "hexcasting:pattern",
+			"op_id": "hexflow:fsm",
+			"anchor": "hexflow:fsm",
+			"input": "[evaluatable]",
+			"output": "",
+			"text": "book.descrip.hexflow:fsm"
 		}
 	]
 }
