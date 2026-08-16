@@ -14,6 +14,7 @@ class HexFlowFrames {
             wrap("recover_stack", FrameRecoverStack.TYPE)
             wrap("reduce", FrameReduce.TYPE)
             wrap("inf_loop", FrameInfiniteLoop.TYPE)
+            wrap("fsm", FrameFSM.TYPE)
         }
 
         @JvmStatic

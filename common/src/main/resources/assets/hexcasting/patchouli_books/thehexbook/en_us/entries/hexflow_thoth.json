@@ -86,6 +86,14 @@
 			"input": "evaluatable",
 			"output": "",
 			"text": "book.descrip.hexflow:inf_loop"
+		},
+		{
+			"type": "hexcasting:pattern",
+			"op_id": "hexflow:fsm",
+			"anchor": "hexflow:fsm",
+			"input": "[evaluatable]",
+			"output": "",
+			"text": "book.descrip.hexflow:fsm"
 		}
 	]
 }
