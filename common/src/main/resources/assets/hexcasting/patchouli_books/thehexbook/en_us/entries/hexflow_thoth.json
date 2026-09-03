@@ -4,14 +4,8 @@
 	"icon": "minecraft:cherry_sapling",
 	"advancement": "hexcasting:root",
 	"pages": [
-		{
-			"type": "hexcasting:pattern",
-			"op_id": "hexflow:pure_map",
-			"anchor": "hexflow:pure_map",
-			"input": "evaluatable, list",
-			"output": "list",
-			"text": "book.descrip.hexflow:pure_map"
-		},
+		"book.descrip.hexflow:thoth.0",
+		"book.descrip.hexflow:thoth.1",
 		{
 			"type": "hexcasting:pattern",
 			"op_id": "hexflow:old_thoth",
@@ -19,6 +13,15 @@
 			"input": "many, evaluatable, list",
 			"output": "list",
 			"text": "book.descrip.hexflow:old_thoth"
+		},
+		"book.descrip.hexflow:thoth.2",
+		{
+			"type": "hexcasting:pattern",
+			"op_id": "hexflow:pure_map",
+			"anchor": "hexflow:pure_map",
+			"input": "evaluatable, list",
+			"output": "list",
+			"text": "book.descrip.hexflow:pure_map"
 		},
 		{
 			"type": "hexcasting:pattern",
