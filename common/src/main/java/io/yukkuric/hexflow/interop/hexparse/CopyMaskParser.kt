@@ -25,7 +25,7 @@ object CopyMaskParser : BaseConstParser.Regex("^copy_mask_[-n]+$") {
                 }
             }
         }
-        val pat = HexPattern.fromAngles(sb.toString(), HexDir.EAST)
+        val pat = HexPattern.fromAngleString(sb.toString(), HexDir.EAST, false)
         return PatternIota(pat)
     }
 

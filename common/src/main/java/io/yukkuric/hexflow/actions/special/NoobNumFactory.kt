@@ -22,7 +22,7 @@ object NoobNumFactory : SpecialHandler.Factory<NoobNumFactory.NoobNumberLiteral>
     }
 
     override fun tryMatch(pat: HexPattern, env: CastingEnvironment): NoobNumberLiteral? {
-        val sig = pat.anglesSignature()
+        val sig = pat.signature.toAnglesString()
         val isPos = sig.startsWith("aqawdedq")
         val isNeg = sig.startsWith("dedwaqae")
         if (!(isPos || isNeg)) return null;

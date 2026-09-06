@@ -51,7 +51,7 @@ object FishermanCopyMaskFactory : SpecialHandler.Factory<FishermanCopyMaskFactor
     }
 
     override fun tryMatch(pattern: HexPattern, env: CastingEnvironment): Copier? {
-        val seq = pattern.anglesSignature()
+        val seq = pattern.signature.toAnglesString()
         if (!seq.startsWith(PATTERN_HEAD)) return null
         var ptr = PATTERN_HEAD.length
         var line = false
