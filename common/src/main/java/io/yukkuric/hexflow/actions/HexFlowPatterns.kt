@@ -38,6 +38,7 @@ class HexFlowPatterns {
             wrap("inf_loop", "wdwddwdwddwdw", HexDir.NORTH_EAST, OpInfiniteLoop)
             wrap("fsm", "wqaqwadawaawadawqaqw", HexDir.NORTH_EAST, OpFSM)
             wrap("sort_by/key", "dwwwaadadaddwwwa", HexDir.SOUTH_EAST, OpSortByKey)
+            wrap("sort_by/cmp", "dwwwawaeqdwdwwwa", HexDir.SOUTH_EAST, OpSortByCompare)
 
 
             wrap("build_nested", "edqdeqdwewwdwqwdwwew", HexDir.SOUTH_WEST, OpBuildNested)
