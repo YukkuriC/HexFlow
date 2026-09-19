@@ -19,6 +19,7 @@ _read HexBook for more details_
     - iterate inside cuboid
     - iterate on straight line
     - (great spell) floodfill BFS by block type
+    - sort iotas by ascending computed key
 - with non-Thoth loops
     - yet another infinite-loop(evaluatable) pattern
     - FSM looper

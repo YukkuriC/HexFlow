@@ -15,6 +15,7 @@ class HexFlowFrames {
             wrap("reduce", FrameReduce.TYPE)
             wrap("inf_loop", FrameInfiniteLoop.TYPE)
             wrap("fsm", FrameFSM.TYPE)
+            wrap("sort_key", FrameSortByKey.TYPE)
         }
 
         @JvmStatic
