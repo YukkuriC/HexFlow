@@ -10,6 +10,8 @@
   "hexcasting.action.hexflow:for_range/floodfill/pure": "纯·连锁采矿之策略",
   "hexcasting.action.hexflow:inf_loop": "阿列夫之策略",
   "hexcasting.action.hexflow:fsm": "马尔可夫之策略",
+  "hexcasting.action.hexflow:sort_by/key": "杰格拉格之策略",
+  "hexcasting.action.hexflow:sort_by/cmp": "谢尔格拉之策略",
   "hexcasting.action.hexflow:build_nested": "套娃",
   "hexcasting.action.hexflow:nested_modify": "器官移植之提整",
   "hexcasting.action.hexflow:noob_num": "菜鸟数字精思",
@@ -43,5 +45,8 @@
   "book.descrip.hexflow:mass_rotate": "接收重排范围和自底向上的序号列表，对剩余栈执行相应重排动作。例如，$(bold)3/$和$(bold)[1,2,0]/$对应$(l:patterns/stackmanip#hexcasting:rotate)$(action)轮换之策略/$，$(bold)2/$和$(bold)[0,1,0,1]/$对应$(l:patterns/stackmanip#hexcasting:2dup)$(action)狄俄斯库里之策略/$",
   "book.descrip.hexflow:weak_escape": "与$(l:patterns/patterns_as_iotas#hexcasting:escape)$(action)考察/$相同，不过拥有最低的执行优先级，在嵌套的$(l:patterns/patterns_as_iotas#hexcasting:open_paren)$(action)内省-反思/$内部不会以 $(bold)2^n/$ 形式指数增长",
   "book.descrip.hexflow:copy_mask": "每个渔夫图案底部鱼线上的 \"n\" 复制一份对应的iota至栈顶，使用与$(l:patterns/stackmanip#hexcasting:mask)$(action)簿记员之策略/$相同的匹配规则。",
-  "book.descrip.hexflow:call_stack": "在独立栈中执行给定的图案/列表/跳转? iota，之后将原栈恢复至底。如果给定一个不大于栈大小的参数X，前X个iota将被带走成为初始新栈。"
+  "book.descrip.hexflow:call_stack": "在独立栈中执行给定的图案/列表/跳转? iota，之后将原栈恢复至底。如果给定一个不大于栈大小的参数X，前X个iota将被带走成为初始新栈。",
+  "book.descrip.hexflow:sort_by/key": "接收一个可执行iota和一个列表。对每个元素单独执行可执行iota，留下的数字作为该元素的关键字，列表将按关键字升序排列。",
+  "book.descrip.hexflow:sort_by/cmp": "接收一个可执行iota和一个列表。对每对候选元素执行可执行iota，留下的布尔值决定它们的先后：true保持第一个候选在前，false将第二个候选放在前面。以此排好整个列表。",
+  "foo": "I hate json"
 }
