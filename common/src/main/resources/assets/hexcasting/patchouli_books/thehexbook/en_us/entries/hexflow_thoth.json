@@ -86,6 +86,23 @@
 			"input": "[evaluatable]",
 			"output": "",
 			"text": "book.descrip.hexflow:fsm"
-		}
+		},
+		{
+			"type": "hexcasting:pattern",
+			"op_id": "hexflow:sort_by/key",
+			"anchor": "hexflow:sort_by/key",
+			"input": "evaluatable, list",
+			"output": "list",
+			"text": "book.descrip.hexflow:sort_by/key"
+		},
+		{
+			"type": "hexcasting:pattern",
+			"op_id": "hexflow:sort_by/cmp",
+			"anchor": "hexflow:sort_by/cmp",
+			"input": "evaluatable, list",
+			"output": "list",
+			"text": "book.descrip.hexflow:sort_by/cmp"
+		},
+		"book.descrip.hexflow:sort_by/cmp.2"
 	]
 }
