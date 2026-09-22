@@ -113,6 +113,7 @@
 			"input": "evaluatable, list",
 			"output": "list",
 			"text": "book.descrip.hexflow:sort_by/cmp"
-		}
+		},
+		"book.descrip.hexflow:sort_by/cmp.2"
 	]
 }
