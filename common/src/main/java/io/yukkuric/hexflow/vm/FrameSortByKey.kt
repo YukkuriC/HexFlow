@@ -24,7 +24,7 @@ import net.minecraft.server.level.ServerLevel
 data class FrameSortByKey(
     val data: TreeList<Iota>,
     val keyFunc: TreeList<Iota>,
-    val keyData: List<Double>,
+    val keyData: TreeList<Double>,
 ) : ContinuationFrame {
     override val type = TYPE
 
@@ -48,7 +48,7 @@ data class FrameSortByKey(
                 HexEvalSounds.MISHAP.get(),
             )
         }
-        val newKeyData = keyData.toMutableList().also { it.add(key) }
+        val newKeyData = keyData.appended(key)
 
         // assign next keyFunc & sorter
         return if (newKeyData.size < data.size) {
@@ -98,7 +98,7 @@ data class FrameSortByKey(
                 inst.group(
                     TreeList.codecOf(IotaType.TYPED_CODEC).fieldOf("data").forGetter { it.data },
                     TreeList.codecOf(IotaType.TYPED_CODEC).fieldOf("keyFunc").forGetter { it.keyFunc },
-                    Codec.DOUBLE.listOf().fieldOf("keyData").forGetter { it.keyData },
+                    TreeList.codecOf(Codec.DOUBLE).fieldOf("keyData").forGetter { it.keyData },
                 ).apply(inst, ::FrameSortByKey)
             }
 
@@ -107,7 +107,7 @@ data class FrameSortByKey(
                 FrameSortByKey::data,
                 IotaType.TYPED_STREAM_CODEC.apply(TreeList.streamCodecOp()),
                 FrameSortByKey::keyFunc,
-                ByteBufCodecs.DOUBLE.apply(ByteBufCodecs.list()),
+                ByteBufCodecs.DOUBLE.apply(TreeList.streamCodecOp()),
                 FrameSortByKey::keyData,
                 ::FrameSortByKey
             )

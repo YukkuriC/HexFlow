@@ -38,10 +38,10 @@ data class FrameSortByCompare(
         val image = harness.image
         val stack = image.stack
 
-        var mergedMutable = mergedList.toMutableList()
-        var leftMutable = mergingLeft.toMutableList()
-        var rightMutable = mergingRight.toMutableList()
-        val queueMutable = mergeQueue.toMutableList()
+        var mergedMutable = mergedList
+        var leftMutable = mergingLeft
+        var rightMutable = mergingRight
+        var queueMutable = mergeQueue
 
         // collect first element on stack as key number
         val addFirst: Boolean
@@ -61,19 +61,20 @@ data class FrameSortByCompare(
         // add selected
         var mergeEarlyEnd: Boolean
         if (addFirst) {
-            mergedMutable.add(leftMutable.removeFirstOrNull()!!)
+            mergedMutable = mergedMutable.appended(leftMutable.head())
+            leftMutable = leftMutable.tail()
             mergeEarlyEnd = leftMutable.isEmpty()
         } else {
-            mergedMutable.add(rightMutable.removeFirstOrNull()!!)
+            mergedMutable = mergedMutable.appended(rightMutable.head())
+            rightMutable = rightMutable.tail()
             mergeEarlyEnd = rightMutable.isEmpty()
         }
 
         // early end: add all & next turn
         if (mergeEarlyEnd) {
-            mergedMutable.addAll(leftMutable)
-            mergedMutable.addAll(rightMutable)
-            leftMutable.clear()
-            rightMutable.clear()
+            mergedMutable = mergedMutable.appendedAll(leftMutable).appendedAll(rightMutable)
+            // leftMutable = TreeList.empty()
+            // rightMutable = TreeList.empty()
 
             // summary now if only 1 in queue
             if (queueMutable.isEmpty()) {
@@ -89,10 +90,11 @@ data class FrameSortByCompare(
                 )
             }
 
-            queueMutable.add(TreeList.from(mergedMutable))
-            mergedMutable.clear()
-            leftMutable = queueMutable.removeFirstOrNull()!!
-            rightMutable = queueMutable.removeFirstOrNull()!!
+            queueMutable = queueMutable.appended(mergedMutable)
+            mergedMutable = TreeList.empty()
+            leftMutable = queueMutable[0]
+            rightMutable = queueMutable[1]
+            queueMutable = queueMutable.slice(2, queueMutable.size)
         }
 
         // first eval keyFunc, then next sorter
@@ -100,10 +102,10 @@ data class FrameSortByCompare(
             NullIota(),
             continuation.pushFrame(
                 copy(
-                    mergedList = TreeList.from(mergedMutable),
-                    mergingLeft = TreeList.from(leftMutable),
-                    mergingRight = TreeList.from(rightMutable),
-                    mergeQueue = TreeList.from(queueMutable),
+                    mergedList = mergedMutable,
+                    mergingLeft = leftMutable,
+                    mergingRight = rightMutable,
+                    mergeQueue = queueMutable,
                 )
             ).pushFrame(FrameEvaluate(compareFunc, true)),
             image.withResetEscape().copy(

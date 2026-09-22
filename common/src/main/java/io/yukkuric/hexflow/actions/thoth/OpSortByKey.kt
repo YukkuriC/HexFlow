@@ -31,7 +31,7 @@ object OpSortByKey : AbstractThoth() {
         }
 
         val frameFirstEval = FrameEvaluate(code, true)
-        val frameSorter = FrameSortByKey(data, code, listOf())
+        val frameSorter = FrameSortByKey(data, code, TreeList.empty())
         val frameKeepFrame = FrameRecoverStack(stack)
 
         return OperationResult(
