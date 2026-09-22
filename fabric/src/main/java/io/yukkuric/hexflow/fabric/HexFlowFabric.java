@@ -8,7 +8,7 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.loader.api.FabricLoader;
 import org.jetbrains.annotations.NotNull;
 
-public final class HexFlowFabric extends HexFlow.IAPI implements ModInitializer {
+public final class HexFlowFabric implements ModInitializer {
     @Override
     public void onInitialize() {
         HexFlowPatterns.registerActions();
@@ -16,9 +16,5 @@ public final class HexFlowFabric extends HexFlow.IAPI implements ModInitializer 
         HexFlowFrames.registerFrames();
 
         HexFlow.commonInit();
-    }
-    @Override
-    public boolean modLoaded(@NotNull String id) {
-        return FabricLoader.getInstance().isModLoaded(id);
     }
 }

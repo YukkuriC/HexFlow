@@ -13,11 +13,10 @@ import at.petrak.hexcasting.api.casting.iota.ListIota
 import at.petrak.hexcasting.api.casting.iota.NullIota
 import at.petrak.hexcasting.api.utils.NBTBuilder
 import at.petrak.hexcasting.api.utils.getList
-import at.petrak.hexcasting.api.utils.serializeToNBT
 import at.petrak.hexcasting.common.lib.hex.HexEvalSounds
 import at.petrak.hexcasting.common.lib.hex.HexIotaTypes
+import io.yukkuric.hexflow.helpers.serializeToNBT
 import net.minecraft.nbt.CompoundTag
-import net.minecraft.nbt.ListTag
 import net.minecraft.nbt.Tag
 import net.minecraft.server.level.ServerLevel
 import kotlin.math.abs
@@ -70,13 +69,8 @@ data class FrameFSM(
         )
     }
 
-    override fun serializeToNBT(): CompoundTag {
-        val dump = ListTag()
-        for (s in states) dump.add(s.serializeToNBT())
-        return NBTBuilder {
-            // damn, why ListTag(list, type) private???
-            "states" %= dump
-        }
+    override fun serializeToNBT() = NBTBuilder {
+        "states" %= states.serializeToNBT()
     }
 
     companion object {

@@ -12,7 +12,7 @@ import net.minecraftforge.registries.RegisterEvent;
 import org.jetbrains.annotations.NotNull;
 
 @Mod(HexFlow.MOD_ID)
-public final class HexFlowForge extends HexFlow.IAPI {
+public final class HexFlowForge {
     public HexFlowForge() {
         var modBus = FMLJavaModLoadingContext.get().getModEventBus();
         modBus.addListener((RegisterEvent event) -> {
@@ -27,9 +27,5 @@ public final class HexFlowForge extends HexFlow.IAPI {
         });
 
         HexFlow.commonInit();
-    }
-    @Override
-    public boolean modLoaded(@NotNull String id) {
-        return ModList.get().isLoaded(id);
     }
 }
