@@ -1,8 +1,8 @@
 package io.yukkuric.hexflow.actions.thoth
 
+import at.petrak.hexcasting.api.casting.SpellList
 import at.petrak.hexcasting.api.casting.eval.OperationResult
 import at.petrak.hexcasting.api.casting.eval.vm.FrameEvaluate
-import at.petrak.hexcasting.api.casting.iota.Iota
 import at.petrak.hexcasting.api.casting.iota.ListIota
 import at.petrak.hexcasting.api.utils.TreeList
 import at.petrak.hexcasting.common.lib.hex.HexEvalSounds
@@ -18,27 +18,27 @@ import io.yukkuric.hexflow.vm.FrameSortByKey
 (pop,get_caster)(1,2,3)sort_by/key,print // and wrong key
  */
 object OpSortByKey : AbstractThoth() {
-    override fun doThoth(code: TreeList<Iota>, data: TreeList<Iota>): OperationResult {
+    override fun doThoth(code: SpellList, data: SpellList): OperationResult {
         // no data to sort
-        if (data.isEmpty()) {
+        if (!data.nonEmpty) {
             stack.add(ListIota(listOf()))
             return OperationResult(
                 image.copy(opsConsumed = image.opsConsumed + 1, stack = TreeList.from(stack)),
                 listOf(),
                 continuation,
-                HexEvalSounds.THOTH.get()
+                HexEvalSounds.THOTH
             )
         }
 
         val frameFirstEval = FrameEvaluate(code, true)
-        val frameSorter = FrameSortByKey(data, code, TreeList.empty())
+        val frameSorter = FrameSortByKey(TreeList.from(data), code, TreeList.empty())
         val frameKeepFrame = FrameRecoverStack(stack)
 
         return OperationResult(
-            image.copy(opsConsumed = image.opsConsumed + 1, stack = TreeList.from(listOf(data[0]))),
+            image.copy(opsConsumed = image.opsConsumed + 1, stack = TreeList.from(listOf(data.car))),
             listOf(),
             continuation.pushFrame(frameKeepFrame).pushFrame(frameSorter).pushFrame(frameFirstEval),
-            HexEvalSounds.THOTH.get()
+            HexEvalSounds.THOTH
         )
     }
 }

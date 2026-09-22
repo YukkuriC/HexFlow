@@ -1,5 +1,6 @@
 package io.yukkuric.hexflow.vm
 
+import at.petrak.hexcasting.api.casting.SpellList
 import at.petrak.hexcasting.api.casting.eval.CastResult
 import at.petrak.hexcasting.api.casting.eval.ResolvedPatternType
 import at.petrak.hexcasting.api.casting.eval.sideeffects.OperatorSideEffect
@@ -9,14 +10,20 @@ import at.petrak.hexcasting.api.casting.eval.vm.FrameEvaluate
 import at.petrak.hexcasting.api.casting.eval.vm.SpellContinuation
 import at.petrak.hexcasting.api.casting.getBool
 import at.petrak.hexcasting.api.casting.iota.Iota
-import at.petrak.hexcasting.api.casting.iota.IotaType
 import at.petrak.hexcasting.api.casting.iota.ListIota
 import at.petrak.hexcasting.api.casting.iota.NullIota
 import at.petrak.hexcasting.api.casting.mishaps.Mishap
+import at.petrak.hexcasting.api.utils.NBTBuilder
 import at.petrak.hexcasting.api.utils.TreeList
+import at.petrak.hexcasting.api.utils.getList
+import at.petrak.hexcasting.api.utils.serializeToNBT
 import at.petrak.hexcasting.common.lib.hex.HexEvalSounds
-import com.mojang.serialization.codecs.RecordCodecBuilder
-import net.minecraft.network.codec.StreamCodec
+import io.yukkuric.hexflow.helpers.deserializeKeyToIotaList
+import io.yukkuric.hexflow.helpers.deserializeToIotaList
+import io.yukkuric.hexflow.helpers.serializeToNBT
+import net.minecraft.nbt.CompoundTag
+import net.minecraft.nbt.ListTag
+import net.minecraft.nbt.Tag
 import net.minecraft.server.level.ServerLevel
 
 /**
@@ -24,7 +31,7 @@ import net.minecraft.server.level.ServerLevel
  * at least 2 in mergeQueue, or should summary before
  */
 data class FrameSortByCompare(
-    val compareFunc: TreeList<Iota>,
+    val compareFunc: SpellList,
     val mergedList: TreeList<Iota>,
     val mergingLeft: TreeList<Iota>,
     val mergingRight: TreeList<Iota>,
@@ -54,7 +61,7 @@ data class FrameSortByCompare(
                 image,
                 listOf(OperatorSideEffect.DoMishap(e, Mishap.Context(null, null))),
                 ResolvedPatternType.ERRORED,
-                HexEvalSounds.MISHAP.get(),
+                HexEvalSounds.MISHAP,
             )
         }
 
@@ -86,7 +93,7 @@ data class FrameSortByCompare(
                     ),
                     listOf(),
                     ResolvedPatternType.EVALUATED,
-                    HexEvalSounds.THOTH.get(),
+                    HexEvalSounds.THOTH,
                 )
             }
 
@@ -114,45 +121,37 @@ data class FrameSortByCompare(
             ),
             listOf(),
             ResolvedPatternType.EVALUATED,
-            HexEvalSounds.NOTHING.get(),
+            HexEvalSounds.NOTHING,
         )
     }
 
-    override fun breakDownwards(stack: TreeList<Iota>) = true to stack
+    override fun breakDownwards(stack: List<Iota>) = true to stack
+    override fun serializeToNBT() = NBTBuilder {
+        "compareFunc" %= compareFunc.serializeToNBT()
+        "mergedList" %= mergedList.serializeToNBT()
+        "mergingLeft" %= mergingLeft.serializeToNBT()
+        "mergingRight" %= mergingRight.serializeToNBT()
+        "mergeQueue" %= mergeQueue.serializeToNBT()
+    }
 
-    override fun size() = compareFunc.size + mergedList.size + mergingLeft.size + mergingRight.size + mergeQueue.size
+    override fun size() = compareFunc.size() + mergedList.size + mergingLeft.size + mergingRight.size + mergeQueue.size
 
     companion object {
         @JvmField
         val TYPE: ContinuationFrame.Type<FrameSortByCompare> = object : ContinuationFrame.Type<FrameSortByCompare> {
-            val CODEC = RecordCodecBuilder.mapCodec<FrameSortByCompare> { inst ->
-                inst.group(
-                    TreeList.codecOf(IotaType.TYPED_CODEC).fieldOf("compareFunc").forGetter { it.compareFunc },
-                    TreeList.codecOf(IotaType.TYPED_CODEC).fieldOf("mergedList").forGetter { it.mergedList },
-                    TreeList.codecOf(IotaType.TYPED_CODEC).fieldOf("mergingLeft").forGetter { it.mergingLeft },
-                    TreeList.codecOf(IotaType.TYPED_CODEC).fieldOf("mergingRight").forGetter { it.mergingRight },
-                    TreeList.codecOf(TreeList.codecOf(IotaType.TYPED_CODEC))
-                        .fieldOf("mergeQueue").forGetter { it.mergeQueue },
-                ).apply(inst, ::FrameSortByCompare)
-            }
-
-            val STREAM_CODEC = StreamCodec.composite(
-                IotaType.TYPED_STREAM_CODEC.apply(TreeList.streamCodecOp()),
-                FrameSortByCompare::compareFunc,
-                IotaType.TYPED_STREAM_CODEC.apply(TreeList.streamCodecOp()),
-                FrameSortByCompare::mergedList,
-                IotaType.TYPED_STREAM_CODEC.apply(TreeList.streamCodecOp()),
-                FrameSortByCompare::mergingLeft,
-                IotaType.TYPED_STREAM_CODEC.apply(TreeList.streamCodecOp()),
-                FrameSortByCompare::mergingRight,
-                IotaType.TYPED_STREAM_CODEC.apply(TreeList.streamCodecOp()).apply(TreeList.streamCodecOp()),
-                FrameSortByCompare::mergeQueue,
-                ::FrameSortByCompare
+            override fun deserializeFromNBT(
+                tag: CompoundTag,
+                world: ServerLevel
+            ) = FrameSortByCompare(
+                tag.deserializeKeyToIotaList("compareFunc", world),
+                tag.deserializeKeyToIotaList("mergedList", world).let(TreeList<*>::from),
+                tag.deserializeKeyToIotaList("mergingLeft", world).let(TreeList<*>::from),
+                tag.deserializeKeyToIotaList("mergingRight", world).let(TreeList<*>::from),
+                tag.getList("mergeQueue", Tag.TAG_LIST)
+                    .map { (it as ListTag).deserializeToIotaList(world) }
+                    .map(TreeList<*>::from)
+                    .let(TreeList<*>::from),
             )
-
-            override fun codec() = CODEC
-
-            override fun streamCodec() = STREAM_CODEC
         }
     }
 }

@@ -1,5 +1,6 @@
 package io.yukkuric.hexflow.vm
 
+import at.petrak.hexcasting.api.casting.SpellList
 import at.petrak.hexcasting.api.casting.eval.CastResult
 import at.petrak.hexcasting.api.casting.eval.ResolvedPatternType
 import at.petrak.hexcasting.api.casting.eval.sideeffects.OperatorSideEffect
@@ -9,21 +10,21 @@ import at.petrak.hexcasting.api.casting.eval.vm.FrameEvaluate
 import at.petrak.hexcasting.api.casting.eval.vm.SpellContinuation
 import at.petrak.hexcasting.api.casting.getDouble
 import at.petrak.hexcasting.api.casting.iota.Iota
-import at.petrak.hexcasting.api.casting.iota.IotaType
 import at.petrak.hexcasting.api.casting.iota.ListIota
 import at.petrak.hexcasting.api.casting.iota.NullIota
 import at.petrak.hexcasting.api.casting.mishaps.Mishap
-import at.petrak.hexcasting.api.utils.TreeList
+import at.petrak.hexcasting.api.utils.*
 import at.petrak.hexcasting.common.lib.hex.HexEvalSounds
-import com.mojang.serialization.Codec
-import com.mojang.serialization.codecs.RecordCodecBuilder
-import net.minecraft.network.codec.ByteBufCodecs
-import net.minecraft.network.codec.StreamCodec
+import io.yukkuric.hexflow.helpers.deserializeKeyToIotaList
+import net.minecraft.nbt.CompoundTag
+import net.minecraft.nbt.DoubleTag
+import net.minecraft.nbt.ListTag
+import net.minecraft.nbt.Tag
 import net.minecraft.server.level.ServerLevel
 
 data class FrameSortByKey(
     val data: TreeList<Iota>,
-    val keyFunc: TreeList<Iota>,
+    val keyFunc: SpellList,
     val keyData: TreeList<Double>,
 ) : ContinuationFrame {
     override val type = TYPE
@@ -45,7 +46,7 @@ data class FrameSortByKey(
                 image,
                 listOf(OperatorSideEffect.DoMishap(e, Mishap.Context(null, null))),
                 ResolvedPatternType.ERRORED,
-                HexEvalSounds.MISHAP.get(),
+                HexEvalSounds.MISHAP,
             )
         }
         val newKeyData = keyData.appended(key)
@@ -64,7 +65,7 @@ data class FrameSortByKey(
                 ),
                 listOf(),
                 ResolvedPatternType.EVALUATED,
-                HexEvalSounds.NOTHING.get(),
+                HexEvalSounds.NOTHING,
             )
         }
         // or do sorting now
@@ -81,40 +82,34 @@ data class FrameSortByKey(
                 ),
                 listOf(),
                 ResolvedPatternType.EVALUATED,
-                HexEvalSounds.THOTH.get(),
+                HexEvalSounds.THOTH,
             )
         }
     }
 
-    override fun breakDownwards(stack: TreeList<Iota>) = true to stack
+    override fun breakDownwards(stack: List<Iota>) = true to stack
+    override fun serializeToNBT() = NBTBuilder {
+        "data" %= data.serializeToNBT()
+        "keyFunc" %= keyFunc.serializeToNBT()
+        "keyData" %= ListTag().also {
+            for (num in keyData) it.add(DoubleTag.valueOf(num))
+        }
+    }
 
-    override fun size() = data.size + keyFunc.size
+    override fun size() = data.size + keyFunc.size()
 
 
     companion object {
         @JvmField
         val TYPE: ContinuationFrame.Type<FrameSortByKey> = object : ContinuationFrame.Type<FrameSortByKey> {
-            val CODEC = RecordCodecBuilder.mapCodec<FrameSortByKey> { inst ->
-                inst.group(
-                    TreeList.codecOf(IotaType.TYPED_CODEC).fieldOf("data").forGetter { it.data },
-                    TreeList.codecOf(IotaType.TYPED_CODEC).fieldOf("keyFunc").forGetter { it.keyFunc },
-                    TreeList.codecOf(Codec.DOUBLE).fieldOf("keyData").forGetter { it.keyData },
-                ).apply(inst, ::FrameSortByKey)
-            }
-
-            val STREAM_CODEC = StreamCodec.composite(
-                IotaType.TYPED_STREAM_CODEC.apply(TreeList.streamCodecOp()),
-                FrameSortByKey::data,
-                IotaType.TYPED_STREAM_CODEC.apply(TreeList.streamCodecOp()),
-                FrameSortByKey::keyFunc,
-                ByteBufCodecs.DOUBLE.apply(TreeList.streamCodecOp()),
-                FrameSortByKey::keyData,
-                ::FrameSortByKey
+            override fun deserializeFromNBT(
+                tag: CompoundTag,
+                world: ServerLevel
+            ) = FrameSortByKey(
+                tag.deserializeKeyToIotaList("data", world).let(TreeList<*>::from),
+                tag.deserializeKeyToIotaList("keyFunc", world),
+                tag.getList("keyData", Tag.TAG_DOUBLE).map { it.asDouble }.let(TreeList<*>::from),
             )
-
-            override fun codec() = CODEC
-
-            override fun streamCodec() = STREAM_CODEC
         }
     }
 }
