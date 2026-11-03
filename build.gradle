@@ -26,7 +26,9 @@ subprojects {
 
     base {
         // Set up a suffixed format for the mod jar names, e.g. `example-fabric`.
-        archivesName = "$rootProject.archives_name-$project.name"
+        var name = project.name
+        if (name == 'forge') name = 'neoforge'
+        archivesName = "$rootProject.archives_name-$name"
     }
 
     repositories {
@@ -49,7 +51,7 @@ subprojects {
         }
     }
 
-    var nameForRef = project.name.equals("common") ? "fabric" : project.name
+    var nameForRef = project.name.equals("common") ? "fabric" : project.name == "forge" ? "neoforge" : project.name
     dependencies {
         minecraft "net.minecraft:minecraft:$rootProject.minecraft_version"
         mappings loom.officialMojangMappings()
